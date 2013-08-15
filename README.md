@@ -1,24 +1,16 @@
 # Lani
 
-TODO: Write a gem description
+A new programming language in Rubinius.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'lani'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+After installing Rubinius, install Lani as a gem:
 
     $ gem install lani
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ lani my_program.ln
 
 ## Contributing
 
