@@ -12,6 +12,16 @@ After installing Rubinius, install Lani as a gem:
 
     $ lani my_program.ln
 
+## Development
+
+To run the tests:
+
+    $ rake
+
+To regenerate the lexer grammar:
+
+    $ rake regenerate
+
 ## Contributing
 
 1. Fork it

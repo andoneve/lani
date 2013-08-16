@@ -18,6 +18,8 @@ task :regenerate do
   end
 end
 
-task :test => :regenerate do
-  puts 'running the tests...'
-end
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:test)
+
+task :test => :regenerate
+task :default => :test

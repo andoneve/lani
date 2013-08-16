@@ -2,6 +2,7 @@ class Lani::Parser
 macro
   # our macros go here
 rule
+  .       { [text, text] }
   # our rules go here
 inner
   # here we put any ruby code we want to extend our lexer with.
