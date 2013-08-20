@@ -57,7 +57,7 @@ class Lani::Parser < Racc::Parser
     token = case @state
     when nil
       case
-      when (text = @ss.scan(/\d+\D\d+/))
+      when (text = @ss.scan(/\d+\.\d+/))
          action { [:FLOAT, text.to_f] }
 
       when (text = @ss.scan(/\d+/))

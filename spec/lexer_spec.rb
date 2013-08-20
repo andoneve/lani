@@ -43,6 +43,7 @@ describe Lani::Parser, '#tokenize' do
       [:ADD, "+"],
       [:FLOAT, 23423.3],
     ])
+    
   end
 
   it 'tokenizes a complex expression' do
@@ -66,4 +67,5 @@ describe Lani::Parser, '#tokenize' do
       [:INTEGER, 5],
     ])
   end
+
 end
