@@ -57,8 +57,14 @@ class Lani::Parser < Racc::Parser
     token = case @state
     when nil
       case
+      when (text = @ss.scan(/\d+/))
+         action { [:INTEGER, text.to_i] }
+
+      when (text = @ss.scan(/\+/))
+         action { [:ADD, text] }
+
       when (text = @ss.scan(/./))
-         action { [text, text] }
+        ;
 
       else
         text = @ss.string[@ss.pos .. -1]

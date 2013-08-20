@@ -1,9 +1,10 @@
 class Lani::Parser
 macro
-  # our macros go here
+  #macros go here
 rule
-  .       { [text, text] }
-  # our rules go here
+  \d+     { [:INTEGER, text.to_i] }
+  \+      { [:ADD, text] }
+  .       # no action
 inner
   # here we put any ruby code we want to extend our lexer with.
   # for example, our own tokenize method.
