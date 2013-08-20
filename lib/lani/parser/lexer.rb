@@ -63,6 +63,15 @@ class Lani::Parser < Racc::Parser
       when (text = @ss.scan(/\+/))
          action { [:ADD, text] }
 
+      when (text = @ss.scan(/\-/))
+         action { [:SUBTRACT, text] }
+
+      when (text = @ss.scan(/\*/))
+         action { [:MULTIPLY, text] }
+
+      when (text = @ss.scan(/\//))
+         action { [:DIVIDE, text] }
+
       when (text = @ss.scan(/./))
         ;
 

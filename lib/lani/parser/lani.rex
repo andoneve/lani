@@ -4,6 +4,9 @@ macro
 rule
   \d+     { [:INTEGER, text.to_i] }
   \+      { [:ADD, text] }
+  \-      { [:SUBTRACT, text] }
+  \*      { [:MULTIPLY, text] }
+  \/      { [:DIVIDE, text] }
   .       # no action
 inner
   # here we put any ruby code we want to extend our lexer with.

@@ -13,29 +13,29 @@ describe Lani::Parser, '#tokenize' do
     ])
   end
 
-  # it 'tokenizes a simple subtract expression' do
-  #   expect(tokenize("3 - 3")).to eq([
-  #     [:INTEGER, 3],
-  #     [:SUBTRACT, "-"],
-  #     [:INTEGER, 3],
-  #   ])
-  # end
+  it 'tokenizes a simple subtract expression' do
+    expect(tokenize("3 - 3")).to eq([
+      [:INTEGER, 3],
+      [:SUBTRACT, "-"],
+      [:INTEGER, 3],
+    ])
+  end
 
-  # it 'tokenizes a simple multiply expression' do
-  #   expect(tokenize("3 * 3")).to eq([
-  #     [:INTEGER, 3],
-  #     [:MULTIPLY, "*"],
-  #     [:INTEGER, 3],
-  #   ])
-  # end
+  it 'tokenizes a simple multiply expression' do
+    expect(tokenize("3 * 3")).to eq([
+      [:INTEGER, 3],
+      [:MULTIPLY, "*"],
+      [:INTEGER, 3],
+    ])
+  end
 
-  # it 'tokenizes a simple divide expression' do
-  #   expect(tokenize("3 / 3")).to eq([
-  #     [:INTEGER, 3],
-  #     [:DIVIDE, "/"],
-  #     [:INTEGER, 3],
-  #   ])
-  # end
+  it 'tokenizes a simple divide expression' do
+    expect(tokenize("3 / 3")).to eq([
+      [:INTEGER, 3],
+      [:DIVIDE, "/"],
+      [:INTEGER, 3],
+    ])
+  end
 
   # it 'tokenizes a simple binary expression with floating point numbers' do
   #   expect(tokenize("3.23 + 23423.3")).to eq([
