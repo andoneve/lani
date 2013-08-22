@@ -10,8 +10,8 @@ rule
   number : INTEGER { val[0] }
          | FLOAT   { val[0] }
 
-  expression : DIGIT
-             | DIGIT ADD DIGIT { return val[0]}
+  expression : INTEGER
+             | INTEGER ADD INTEGER { return val[0] + val[2]}
 end
 
 ---- header ----
