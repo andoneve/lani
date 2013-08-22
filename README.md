@@ -1,6 +1,8 @@
 # Lani
 
-A new programming language in Rubinius.
+A new programming language in Rubinius. This is a project from the 2013 Rails Girls Summer of Code [http://www.railsgirlssummerofcode.org] by Team Rails Grrls [http://railsgrrls.tumblr.com or http://www.twitter.com/RailsGrrls @RailsGrrls]. We are beginners who are writing our own programming language in Rubinius and then writing a tutorial for beginners. 
+
+The documentation is traditionally bad for this topic, especially for beginners. Our goal is to change that! We want beginners to realize that they can write their own programming language and give them the tools and documentation to make it happen.  
 
 ## Installation
 
@@ -16,11 +18,15 @@ After installing Rubinius, install Lani as a gem:
 
 To run the tests:
 
-    $ rake
+    $ rake test
 
 To regenerate the lexer grammar:
 
-    $ rake regenerate
+    $ rake rexical:regenerate
+
+To regenerate the parser grammar:
+	
+	$ rake racc:regenerate 
 
 ## Contributing
 
