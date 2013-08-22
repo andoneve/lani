@@ -1,1 +1,2 @@
-require_relative "parser/lexer"
+require_relative "ast"
+require_relative "parser/parser"

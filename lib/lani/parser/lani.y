@@ -1,17 +1,17 @@
 class Lani::Parser
   token INTEGER
   token FLOAT
+  token ADD
 
   options no_result_var
 rule
-  root : number
-       | /* none */ { nil }
+  root : expression { AST::Script.new(filename, lineno, [val[0]]) }
+       | /* none */ { AST::Script.new(filename, lineno) }
 
-  number : INTEGER { val[0] }
-         | FLOAT   { val[0] }
+  number : INTEGER { AST::IntegerNode.new(filename, lineno, val[0]) }
+         | FLOAT   { } # <- figure it out!! :)
 
-  expression : INTEGER
-             | INTEGER ADD INTEGER { return val[0] + val[2]}
+  expression :
 end
 
 ---- header ----
