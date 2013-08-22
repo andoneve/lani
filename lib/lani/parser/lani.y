@@ -9,6 +9,9 @@ rule
 
   number : INTEGER { val[0] }
          | FLOAT   { val[0] }
+
+  expression : DIGIT
+             | DIGIT ADD DIGIT { return val[0]}
 end
 
 ---- header ----
