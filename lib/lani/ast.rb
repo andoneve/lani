@@ -1,6 +1,6 @@
 
 module AST
-  class Script
+  class Program
     attr_reader :filename, :line, :body
 
     def initialize(filename="(script)", line=1, body=[])

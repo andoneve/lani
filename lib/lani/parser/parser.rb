@@ -11,7 +11,7 @@ require_relative 'lexer'
 module Lani
   class Parser < Racc::Parser
 
-module_eval(<<'...end lani.y/module_eval...', 'lani.y', 21)
+module_eval(<<'...end lani.y/module_eval...', 'lani.y', 27)
 
 def filename
   @filename
@@ -26,40 +26,42 @@ end
 ##### State transition tables begin ###
 
 racc_action_table = [
-     3,     4 ]
+     4,     5,     8,     9 ]
 
 racc_action_check = [
-     1,     3 ]
+     0,     0,     1,     8 ]
 
 racc_action_pointer = [
-   nil,     0,   nil,     1,   nil ]
+    -2,     2,   nil,   nil,   nil,   nil,   nil,   nil,     3,   nil ]
 
 racc_action_default = [
-    -2,    -6,    -1,    -6,     5 ]
+    -2,    -8,    -1,    -3,    -4,    -5,    -6,    -7,    -8,    10 ]
 
 racc_goto_table = [
-     1,     2 ]
+     1,     2,     3,     6,     7 ]
 
 racc_goto_check = [
-     1,     2 ]
+     1,     2,     3,     4,     5 ]
 
 racc_goto_pointer = [
-   nil,     0,     1,   nil ]
+   nil,     0,     1,     2,     3,     4 ]
 
 racc_goto_default = [
-   nil,   nil,   nil,   nil ]
+   nil,   nil,   nil,   nil,   nil,   nil ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 6, :_reduce_1,
-  0, 6, :_reduce_2,
-  1, 8, :_reduce_3,
-  1, 8, :_reduce_4,
-  0, 7, :_reduce_none ]
+  1, 6, :_reduce_none,
+  0, 7, :_reduce_2,
+  1, 7, :_reduce_3,
+  1, 9, :_reduce_4,
+  1, 9, :_reduce_5,
+  1, 10, :_reduce_none,
+  1, 8, :_reduce_7 ]
 
-racc_reduce_n = 6
+racc_reduce_n = 8
 
-racc_shift_n = 5
+racc_shift_n = 10
 
 racc_token_table = {
   false => 0,
@@ -96,8 +98,10 @@ Racc_token_to_s_table = [
   "ADD",
   "$start",
   "root",
-  "expression",
-  "number" ]
+  "program",
+  "expressions",
+  "number",
+  "expression" ]
 
 Racc_debug_parser = false
 
@@ -105,31 +109,39 @@ Racc_debug_parser = false
 
 # reduce 0 omitted
 
-module_eval(<<'.,.,', 'lani.y', 7)
-  def _reduce_1(val, _values)
-     AST::Script.new(filename, lineno, [val[0]]) 
-  end
-.,.,
+# reduce 1 omitted
 
-module_eval(<<'.,.,', 'lani.y', 8)
+module_eval(<<'.,.,', 'lani.y', 9)
   def _reduce_2(val, _values)
-     AST::Script.new(filename, lineno) 
+     AST::Program.new( filename, lineno, [])
   end
 .,.,
 
 module_eval(<<'.,.,', 'lani.y', 10)
   def _reduce_3(val, _values)
-     AST::IntegerNode.new(filename, lineno, val[0]) 
+     AST::Program.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 11)
+module_eval(<<'.,.,', 'lani.y', 13)
   def _reduce_4(val, _values)
-     
+     AST::IntegerNode.new( filename, lineno, val[0])
   end
 .,.,
 
-# reduce 5 omitted
+module_eval(<<'.,.,', 'lani.y', 14)
+  def _reduce_5(val, _values)
+     AST::FloatNode.new( filename, lineno, val[0])
+  end
+.,.,
+
+# reduce 6 omitted
+
+module_eval(<<'.,.,', 'lani.y', 18)
+  def _reduce_7(val, _values)
+     [val[0]] 
+  end
+.,.,
 
 def _reduce_none(val, _values)
   val[0]

@@ -5,13 +5,19 @@ class Lani::Parser
 
   options no_result_var
 rule
-  root : expression { AST::Script.new(filename, lineno, [val[0]]) }
-       | /* none */ { AST::Script.new(filename, lineno) }
+  root : program
+  
+  program : { AST::Program.new( filename, lineno, [])}
+          | expressions { AST::Program.new( filename, lineno, val[0])}
+  
 
-  number : INTEGER { AST::IntegerNode.new(filename, lineno, val[0]) }
-         | FLOAT   { } # <- figure it out!! :)
+  number : INTEGER { AST::IntegerNode.new( filename, lineno, val[0])}
+         | FLOAT { AST::FloatNode.new( filename, lineno, val[0])}
 
-  expression :
+  expression : number
+
+  expressions : expression { [val[0]] }
+
 end
 
 ---- header ----
