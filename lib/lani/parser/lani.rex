@@ -10,6 +10,7 @@ rule
   \/      { [:DIVIDE, text] }
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
+  \n      { [:NEWLINE, text]}
 
   .       # no action
   
