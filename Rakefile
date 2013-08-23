@@ -27,7 +27,7 @@ namespace :rexical do
 end
 
 namespace :racc do
-  desc "It regenerates the parser.rb file"
+  desc "It cleans the generated parser"
   task :clean do
     `rm lib/lani/parser/parser.rb`
   end
