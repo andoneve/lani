@@ -8,7 +8,7 @@ module Lani
       yield ast.body
     end
 
-    it 'parses an empty script' do
+    it 'parses an empty program' do
       parse("") do |expressions|
         expect(expressions).to be_empty
       end
