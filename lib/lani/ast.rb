@@ -49,6 +49,11 @@ module AST
       super
       @value = value.to_f
     end
+
+    def bytecode(g)
+      pos(g)
+      g.push_literal(value)
+    end
   end
 
   class BinaryNode < Node
