@@ -1,76 +1,60 @@
 
 module AST
-  class Program
-    attr_reader :filename, :line, :body
+  class Node
+    attr_reader :filename, :line
 
-    def initialize(filename="(script)", line=1, body=[])
+    def initialize(filename="(script)", line=1, *args)
       @filename = filename
       @line = line
+    end
+  end
+
+  class Program < Node
+    attr_reader :body
+
+    def initialize(*args, body)
+      super
       @body = body
     end
   end
 
-  class IntegerNode
-    attr_reader :filename, :line, :value
+  class IntegerNode < Node
+    attr_reader :value
 
-    def initialize(filename="(script)", line=1, value)
-      @filename = filename
-      @line = line
-      @value = value
+    def initialize(*args, value)
+      super
+      @value = value.to_i
     end
   end
 
-  class FloatNode
-    attr_reader :filename, :line, :value
+  class FloatNode < Node
+    attr_reader :value
 
-    def initialize(filename="(script)", line=1, value)
-      @filename = filename
-      @line = line  
-      @value = value
+    def initialize(*args, value)
+      super
+      @value = value.to_f
     end
   end
 
-  class AddNode
-    attr_reader :filename, :line, :lhs, :rhs
+  class BinaryNode < Node
+    attr_reader :lhs, :rhs
 
-    def initialize(filename="(script)", line=1, lhs, rhs)
-      @filename = filename
-      @line = line
+    def initialize(*args, lhs, rhs)
+      super
       @lhs = lhs
       @rhs = rhs
     end
   end
 
-  class SubtractNode
-    attr_reader :filename, :line, :lhs, :rhs
-
-    def initialize(filename="(script)", line=1, lhs, rhs)
-      @filename = filename
-      @line = line
-      @lhs = lhs
-      @rhs = rhs
-    end
+  class AddNode < BinaryNode
   end
 
-   class MultiplyNode
-    attr_reader :filename, :line, :lhs, :rhs
-
-    def initialize(filename="(script)", line=1, lhs, rhs)
-      @filename = filename
-      @line = line
-      @lhs = lhs
-      @rhs = rhs
-    end
+  class SubtractNode < BinaryNode
   end
 
-  class DivideNode
-    attr_reader :filename, :line, :lhs, :rhs
+  class MultiplyNode < BinaryNode
+  end
 
-    def initialize(filename="(script)", line=1, lhs, rhs)
-      @filename = filename
-      @line = line
-      @lhs = lhs
-      @rhs = rhs
-    end
+  class DivideNode < BinaryNode
   end
 end
