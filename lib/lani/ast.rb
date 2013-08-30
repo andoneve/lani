@@ -67,14 +67,40 @@ module AST
   end
 
   class AddNode < BinaryNode
+
+    def bytecode(g)
+      pos(g)
+      lhs.bytecode(g)
+      rhs.bytecode(g)
+      g.send(:+, 1)
+    end
   end
 
   class SubtractNode < BinaryNode
+    
+    def bytecode(g)
+      pos(g)
+      lhs.bytecode(g)
+      rhs.bytecode(g)
+      g.send(:-, 1)
+    end
   end
 
   class MultiplyNode < BinaryNode
+    def bytecode(g)
+      pos(g)
+      lhs.bytecode(g)
+      rhs.bytecode(g)
+      g.send(:*, 1)
+    end
   end
 
   class DivideNode < BinaryNode
+    def bytecode(g)
+      pos(g)
+      lhs.bytecode(g)
+      rhs.bytecode(g)
+      g.send(:/, 1)
+    end
   end
 end
