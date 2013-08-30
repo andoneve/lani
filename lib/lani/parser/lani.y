@@ -18,11 +18,11 @@ class Lani::Parser
 rule
   root : program
   
-  program : { AST::Program.new( filename, lineno, [])}
+  program :             { AST::Program.new( filename, lineno, [])}
           | expressions { AST::Program.new( filename, lineno, val[0])}
   
   number : INTEGER { AST::IntegerNode.new( filename, lineno, val[0])}
-         | FLOAT { AST::FloatNode.new( filename, lineno, val[0])}
+         | FLOAT   { AST::FloatNode.new( filename, lineno, val[0])}
 
   expression : number
              | binary_operation
