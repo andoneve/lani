@@ -49,6 +49,12 @@ def filename
   @filename
 end
 
+alias_method :parse_string, :scan_str
+
+def pre_exe
+  []
+end
+
 def on_error(t, val, vstack)
   raise ParseError, sprintf("\nparse error on value %s (%s) #{@filename}:#{@line}",
       val.inspect, token_to_str(t) || '?')

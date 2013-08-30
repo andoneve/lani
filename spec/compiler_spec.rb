@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Lani::Compiler do
-  it 'rocks' do
-    p Lani::Compiler.eval("3")
+  it 'compiles integers' do
+    Lani::Compiler.eval("3").must_equal 3
   end
 end

@@ -51,6 +51,10 @@ module Lani
       ensure
         @processor = Lani::Parser
       end
+
+      def create
+        @parser = @processor.new
+      end
     end
 
     class FileParser < Parser

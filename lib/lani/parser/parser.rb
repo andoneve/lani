@@ -17,6 +17,12 @@ def filename
   @filename
 end
 
+alias_method :parse_string, :scan_str
+
+def pre_exe
+  []
+end
+
 def on_error(t, val, vstack)
   raise ParseError, sprintf("\nparse error on value %s (%s) #{@filename}:#{@line}",
       val.inspect, token_to_str(t) || '?')
@@ -33,15 +39,15 @@ racc_action_table = [
     16,    17,    16,    17 ]
 
 racc_action_check = [
-     0,     0,    17,    17,    16,    16,     8,     8,     0,     1,
-    17,     3,    16,    10,     8,    15,    15,    14,    14,    11,
-    11,    21,    21,    15,   nil,    14,   nil,    11,    13,    13,
-    13,    13,   nil,    13,    19,    19,    19,    19,     9,     9,
-     9,     9,    22,    22 ]
+     0,     0,     8,     8,    11,    11,    14,    14,     0,     1,
+     8,     3,    11,    10,    14,    15,    15,    16,    16,    17,
+    17,    21,    21,    15,   nil,    16,   nil,    17,    13,    13,
+    13,    13,   nil,    13,     9,     9,     9,     9,    19,    19,
+    19,    19,    22,    22 ]
 
 racc_action_pointer = [
-    -2,     9,   nil,     3,   nil,   nil,   nil,   nil,     4,    34,
-    13,    17,   nil,    24,    15,    13,     2,     0,   nil,    30,
+    -2,     9,   nil,     3,   nil,   nil,   nil,   nil,     0,    30,
+    13,     2,   nil,    24,     4,    13,    15,    17,   nil,    34,
    nil,    15,    36,   nil,   nil ]
 
 racc_action_default = [
@@ -50,15 +56,15 @@ racc_action_default = [
     -8,    -9,   -10,   -11,   -12 ]
 
 racc_goto_table = [
-     9,     3,     2,     1,    11,   nil,   nil,   nil,    13,   nil,
+     9,     1,     2,     3,    11,   nil,   nil,   nil,    13,   nil,
    nil,    19,   nil,   nil,    21,    22,    23,    24 ]
 
 racc_goto_check = [
-     5,     3,     2,     1,     7,   nil,   nil,   nil,     5,   nil,
+     5,     1,     2,     3,     7,   nil,   nil,   nil,     5,   nil,
    nil,     5,   nil,   nil,     5,     5,     5,     5 ]
 
 racc_goto_pointer = [
-   nil,     3,     2,     1,   nil,     0,   nil,     1 ]
+   nil,     1,     2,     3,   nil,     0,   nil,     1 ]
 
 racc_goto_default = [
    nil,   nil,   nil,   nil,     6,   nil,     7,   nil ]
