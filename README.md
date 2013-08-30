@@ -12,7 +12,10 @@ After installing Rubinius, install Lani as a gem:
 
 ## Usage
 
-    $ lani my_program.ln
+    $ lani -h
+    $ lani
+    ln> 3 + 3
+    # => 6
 
 ## Development
 

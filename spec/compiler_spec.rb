@@ -34,4 +34,3 @@ describe Lani::Compiler do
   end
 
 end
-
