@@ -84,6 +84,9 @@ class Lani::Parser < Racc::Parser
       when (text = @ss.scan(/\n/))
          action { [:NEWLINE, text]}
 
+      when (text = @ss.scan(/\"[^"]*"/))
+         action { [:STRING, text]}
+
       when (text = @ss.scan(/./))
         ;
 

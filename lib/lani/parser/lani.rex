@@ -11,6 +11,7 @@ rule
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
   \n      { [:NEWLINE, text]}
+  \"[^"]*"   { [:STRING, text]}
 
   .       # no action
   
