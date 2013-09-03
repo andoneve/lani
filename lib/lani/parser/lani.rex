@@ -12,8 +12,8 @@ rule
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
   \n      { [:NEWLINE, text]}
-  \"[^"]*"   { [:STRING, text]}
-  \[a-z_]*  { [:VARIABLE, text]}
+  \"[^"]+"   { [:STRING, text]}
+  [a-z_]+  { [:VARIABLE, text]}
   .       # no action
   
 inner
