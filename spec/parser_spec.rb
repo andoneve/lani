@@ -149,5 +149,14 @@ module Lani
         expect(lhs).to be_kind_of(AST::MultiplyNode)
       end
     end
+
+    it 'parses a string' do
+      parse('"this is a test string 1234"') do |expressions|
+        string = expressions.first
+        expect(string).to be_kind_of(AST::StringNode)
+        expect(string.value).to eq('"this is a test string 1234"')
+      end
+    end
+
   end
 end

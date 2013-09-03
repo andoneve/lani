@@ -103,4 +103,18 @@ module AST
       g.send(:/, 1)
     end
   end
+
+  class StringNode < Node
+    attr_reader :value
+
+    def initialize(filename, line, value)
+      super
+      @value = value
+    end
+
+    def bytecode(g)
+      pos(g)
+      g.push_literal(value)
+    end
+  end
 end

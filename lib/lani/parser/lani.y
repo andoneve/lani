@@ -8,6 +8,7 @@ class Lani::Parser
   token NEWLINE
   token RPAREN
   token LPAREN
+  token STRING
 
   prechigh
     left MULTIPLY DIVIDE
@@ -24,9 +25,12 @@ rule
   number : INTEGER { AST::IntegerNode.new( filename, lineno, val[0])}
          | FLOAT   { AST::FloatNode.new( filename, lineno, val[0])}
 
+  string : STRING { AST::StringNode.new( filename, lineno, val[0])}
+
   expression : number
              | binary_operation
              | LPAREN expression RPAREN { val[1] }
+             | string
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}
                    | expression SUBTRACT expression {AST::SubtractNode.new( filename, lineno, val[0], val[2])}
@@ -37,6 +41,8 @@ rule
               | expressions terminator expression { val[0] << val[2] }
 
   terminator : NEWLINE
+
+  
 
 end
 

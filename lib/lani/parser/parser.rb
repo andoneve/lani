@@ -11,7 +11,7 @@ require_relative 'lexer'
 module Lani
   class Parser < Racc::Parser
 
-module_eval(<<'...end lani.y/module_eval...', 'lani.y', 47)
+module_eval(<<'...end lani.y/module_eval...', 'lani.y', 53)
 
 def filename
   @filename
@@ -32,64 +32,66 @@ end
 ##### State transition tables begin ###
 
 racc_action_table = [
-     4,     5,     4,     5,     4,     5,     4,     5,     8,    10,
-     8,    12,     8,    18,     8,     4,     5,     4,     5,     4,
-     5,    16,    17,     8,   nil,     8,   nil,     8,    14,    15,
-    16,    17,   nil,    20,    14,    15,    16,    17,    14,    15,
-    16,    17,    16,    17 ]
+     4,     5,     4,     5,     4,     5,     4,     5,     9,     6,
+     9,     6,     9,     6,     9,     6,     4,     5,     4,     5,
+     4,     5,    18,    19,     9,     6,     9,     6,     9,     6,
+    16,    17,    18,    19,    12,    22,    16,    17,    18,    19,
+    16,    17,    18,    19,    18,    19,    14,    20 ]
 
 racc_action_check = [
-     0,     0,     8,     8,    11,    11,    14,    14,     0,     1,
-     8,     3,    11,    10,    14,    15,    15,    16,    16,    17,
-    17,    21,    21,    15,   nil,    16,   nil,    17,    13,    13,
-    13,    13,   nil,    13,     9,     9,     9,     9,    19,    19,
-    19,    19,    22,    22 ]
+     0,     0,     9,     9,    13,    13,    16,    16,     0,     0,
+     9,     9,    13,    13,    16,    16,    17,    17,    18,    18,
+    19,    19,    23,    23,    17,    17,    18,    18,    19,    19,
+    15,    15,    15,    15,     1,    15,    11,    11,    11,    11,
+    21,    21,    21,    21,    24,    24,     3,    12 ]
 
 racc_action_pointer = [
-    -2,     9,   nil,     3,   nil,   nil,   nil,   nil,     0,    30,
-    13,     2,   nil,    24,     4,    13,    15,    17,   nil,    34,
-   nil,    15,    36,   nil,   nil ]
+    -2,    34,   nil,    38,   nil,   nil,   nil,   nil,   nil,     0,
+   nil,    32,    47,     2,   nil,    26,     4,    14,    16,    18,
+   nil,    36,   nil,    16,    38,   nil,   nil ]
 
 racc_action_default = [
-    -2,   -16,    -1,    -3,    -4,    -5,    -6,    -7,   -16,   -13,
-   -16,   -16,   -15,   -16,   -16,   -16,   -16,   -16,    25,   -14,
-    -8,    -9,   -10,   -11,   -12 ]
+    -2,   -18,    -1,    -3,    -4,    -5,    -6,    -7,    -8,   -18,
+   -10,   -15,   -18,   -18,   -17,   -18,   -18,   -18,   -18,   -18,
+    27,   -16,    -9,   -11,   -12,   -13,   -14 ]
 
 racc_goto_table = [
-     9,     1,     2,     3,    11,   nil,   nil,   nil,    13,   nil,
-   nil,    19,   nil,   nil,    21,    22,    23,    24 ]
+    11,     1,     2,     3,    13,   nil,   nil,   nil,   nil,    15,
+   nil,   nil,   nil,    21,   nil,   nil,    23,    24,    25,    26 ]
 
 racc_goto_check = [
-     5,     1,     2,     3,     7,   nil,   nil,   nil,     5,   nil,
-   nil,     5,   nil,   nil,     5,     5,     5,     5 ]
+     6,     1,     2,     3,     8,   nil,   nil,   nil,   nil,     6,
+   nil,   nil,   nil,     6,   nil,   nil,     6,     6,     6,     6 ]
 
 racc_goto_pointer = [
-   nil,     1,     2,     3,   nil,     0,   nil,     1 ]
+   nil,     1,     2,     3,   nil,   nil,     0,   nil,     1 ]
 
 racc_goto_default = [
-   nil,   nil,   nil,   nil,     6,   nil,     7,   nil ]
+   nil,   nil,   nil,   nil,     7,    10,   nil,     8,   nil ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 12, :_reduce_none,
-  0, 13, :_reduce_2,
-  1, 13, :_reduce_3,
-  1, 15, :_reduce_4,
-  1, 15, :_reduce_5,
-  1, 16, :_reduce_none,
-  1, 16, :_reduce_none,
-  3, 16, :_reduce_8,
-  3, 17, :_reduce_9,
-  3, 17, :_reduce_10,
-  3, 17, :_reduce_11,
-  3, 17, :_reduce_12,
-  1, 14, :_reduce_13,
-  3, 14, :_reduce_14,
-  1, 18, :_reduce_none ]
+  1, 13, :_reduce_none,
+  0, 14, :_reduce_2,
+  1, 14, :_reduce_3,
+  1, 16, :_reduce_4,
+  1, 16, :_reduce_5,
+  1, 17, :_reduce_6,
+  1, 18, :_reduce_none,
+  1, 18, :_reduce_none,
+  3, 18, :_reduce_9,
+  1, 18, :_reduce_none,
+  3, 19, :_reduce_11,
+  3, 19, :_reduce_12,
+  3, 19, :_reduce_13,
+  3, 19, :_reduce_14,
+  1, 15, :_reduce_15,
+  3, 15, :_reduce_16,
+  1, 20, :_reduce_none ]
 
-racc_reduce_n = 16
+racc_reduce_n = 18
 
-racc_shift_n = 25
+racc_shift_n = 27
 
 racc_token_table = {
   false => 0,
@@ -102,9 +104,10 @@ racc_token_table = {
   :DIVIDE => 7,
   :NEWLINE => 8,
   :RPAREN => 9,
-  :LPAREN => 10 }
+  :LPAREN => 10,
+  :STRING => 11 }
 
-racc_nt_base = 11
+racc_nt_base = 12
 
 racc_use_result_var = false
 
@@ -136,11 +139,13 @@ Racc_token_to_s_table = [
   "NEWLINE",
   "RPAREN",
   "LPAREN",
+  "STRING",
   "$start",
   "root",
   "program",
   "expressions",
   "number",
+  "string",
   "expression",
   "binary_operation",
   "terminator" ]
@@ -153,77 +158,85 @@ Racc_debug_parser = false
 
 # reduce 1 omitted
 
-module_eval(<<'.,.,', 'lani.y', 20)
+module_eval(<<'.,.,', 'lani.y', 21)
   def _reduce_2(val, _values)
      AST::Program.new( filename, lineno, [])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 21)
+module_eval(<<'.,.,', 'lani.y', 22)
   def _reduce_3(val, _values)
      AST::Program.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 23)
+module_eval(<<'.,.,', 'lani.y', 24)
   def _reduce_4(val, _values)
      AST::IntegerNode.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 24)
+module_eval(<<'.,.,', 'lani.y', 25)
   def _reduce_5(val, _values)
      AST::FloatNode.new( filename, lineno, val[0])
   end
 .,.,
 
-# reduce 6 omitted
+module_eval(<<'.,.,', 'lani.y', 27)
+  def _reduce_6(val, _values)
+     AST::StringNode.new( filename, lineno, val[0])
+  end
+.,.,
 
 # reduce 7 omitted
 
-module_eval(<<'.,.,', 'lani.y', 28)
-  def _reduce_8(val, _values)
+# reduce 8 omitted
+
+module_eval(<<'.,.,', 'lani.y', 31)
+  def _reduce_9(val, _values)
      val[1] 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 30)
-  def _reduce_9(val, _values)
+# reduce 10 omitted
+
+module_eval(<<'.,.,', 'lani.y', 34)
+  def _reduce_11(val, _values)
     AST::AddNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 31)
-  def _reduce_10(val, _values)
+module_eval(<<'.,.,', 'lani.y', 35)
+  def _reduce_12(val, _values)
     AST::SubtractNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 32)
-  def _reduce_11(val, _values)
+module_eval(<<'.,.,', 'lani.y', 36)
+  def _reduce_13(val, _values)
     AST::MultiplyNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 33)
-  def _reduce_12(val, _values)
+module_eval(<<'.,.,', 'lani.y', 37)
+  def _reduce_14(val, _values)
     AST::DivideNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 35)
-  def _reduce_13(val, _values)
+module_eval(<<'.,.,', 'lani.y', 39)
+  def _reduce_15(val, _values)
      [val[0]] 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 36)
-  def _reduce_14(val, _values)
+module_eval(<<'.,.,', 'lani.y', 40)
+  def _reduce_16(val, _values)
      val[0] << val[2] 
   end
 .,.,
 
-# reduce 15 omitted
+# reduce 17 omitted
 
 def _reduce_none(val, _values)
   val[0]

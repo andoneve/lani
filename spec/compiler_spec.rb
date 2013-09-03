@@ -33,4 +33,8 @@ describe Lani::Compiler do
   	Lani::Compiler.eval("3 * (2 / (6 / 123 + 44444) * 34.21) - 900").should eq(-900.0)
   end
 
+  it 'compiles a string' do
+    Lani::Compiler.eval('"this is a test string 1234"').should eq('"this is a test string 1234"')
+  end
+
 end
