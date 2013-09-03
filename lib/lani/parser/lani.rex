@@ -6,13 +6,14 @@ rule
   \d+     { [:INTEGER, text.to_i] }
   \+      { [:ADD, text] }
   \-      { [:SUBTRACT, text] }
+  \=      { [:ASSIGN, text] }
   \*      { [:MULTIPLY, text] }
   \/      { [:DIVIDE, text] }
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
   \n      { [:NEWLINE, text]}
   \"[^"]*"   { [:STRING, text]}
-
+  \[a-z_]*  { [:VARIABLE, text]}
   .       # no action
   
 inner
