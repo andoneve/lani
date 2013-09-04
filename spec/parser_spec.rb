@@ -158,5 +158,16 @@ module Lani
       end
     end
 
+    it 'parses a variable assignment' do
+      parse('a = 1') do |expressions|
+        assignment = expressions.first
+        expect(assignment).to be_kind_of(AST::AssignmentNode)
+        puts assignment.name.inspect
+        puts assignment.value.inspect
+        expect(assignment.name.name).to eq('a')
+        expect(assignment.value.value).to eq(1)
+      end
+    end
+
   end
 end

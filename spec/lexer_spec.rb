@@ -83,26 +83,11 @@ describe Lani::Parser, '#tokenize' do
       [:INTEGER, 2],
     ])
   end
-
-  it 'tokenizes an assignment' do
-    expect(tokenize('1 = 1')).to eq([
-      [:INTEGER, 1],
-      [:ASSIGN, "="],
-      [:INTEGER, 1],
-    ])
-  end
+  
 
   it 'tokenizes a variable' do
-    expect(tokenize('v')).to eq([
-      [:VARIABLE, "v"],
-    ])
-  end
-
-  it 'tokenizes a variable assignment' do
-    expect(tokenize('vari_able = 1')).to eq([
+    expect(tokenize('vari_able')).to eq([
       [:VARIABLE, "vari_able"],
-      [:ASSIGN, "="],
-      [:INTEGER, 1],
     ])
   end
 

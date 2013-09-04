@@ -63,14 +63,17 @@ class Lani::Parser < Racc::Parser
       when (text = @ss.scan(/\d+/))
          action { [:INTEGER, text.to_i] }
 
+      when (text = @ss.scan(/\"[^"]+"/))
+         action { [:STRING, text]}
+
+      when (text = @ss.scan(/[a-z_]+/))
+         action { [:VARIABLE, text]}
+
       when (text = @ss.scan(/\+/))
          action { [:ADD, text] }
 
       when (text = @ss.scan(/\-/))
          action { [:SUBTRACT, text] }
-
-      when (text = @ss.scan(/\=/))
-         action { [:ASSIGN, text] }
 
       when (text = @ss.scan(/\*/))
          action { [:MULTIPLY, text] }
@@ -84,14 +87,11 @@ class Lani::Parser < Racc::Parser
       when (text = @ss.scan(/\)/))
          action { [:RPAREN, text]}
 
+      when (text = @ss.scan(/\=/))
+         action { [:ASSIGN, text]}
+
       when (text = @ss.scan(/\n/))
          action { [:NEWLINE, text]}
-
-      when (text = @ss.scan(/\"[^"]+"/))
-         action { [:STRING, text]}
-
-      when (text = @ss.scan(/[a-z_]+/))
-         action { [:VARIABLE, text]}
 
       when (text = @ss.scan(/./))
         ;

@@ -9,6 +9,9 @@ class Lani::Parser
   token RPAREN
   token LPAREN
   token STRING
+  token VARIABLE
+  token ASSIGN
+
 
   prechigh
     left MULTIPLY DIVIDE
@@ -19,18 +22,25 @@ class Lani::Parser
 rule
   root : program
   
-  program :             { AST::Program.new( filename, lineno, [])}
-          | expressions { AST::Program.new( filename, lineno, val[0])}
+  program : /* nothing */ { AST::Program.new( filename, lineno, [])}
+          | expressions   { AST::Program.new( filename, lineno, val[0])}
   
   number : INTEGER { AST::IntegerNode.new( filename, lineno, val[0])}
          | FLOAT   { AST::FloatNode.new( filename, lineno, val[0])}
 
   string : STRING { AST::StringNode.new( filename, lineno, val[0])}
 
+  variable : VARIABLE { AST::VariableNode.new( filename, lineno, val[0])}
+
+ 
+  assignment : variable ASSIGN expression {AST::AssignmentNode.new( filename, lineno, val[0], val[2]) }
+
   expression : number
              | binary_operation
              | LPAREN expression RPAREN { val[1] }
              | string
+             | variable
+             | assignment
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}
                    | expression SUBTRACT expression {AST::SubtractNode.new( filename, lineno, val[0], val[2])}

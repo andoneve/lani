@@ -2,18 +2,28 @@ class Lani::Parser
 macro
   #macros go here
 rule
-  \d+\.\d+    { [:FLOAT, text.to_f] }
-  \d+     { [:INTEGER, text.to_i] }
+
+# Literals
+  \d+\.\d+   { [:FLOAT, text.to_f] }
+  \d+        { [:INTEGER, text.to_i] }
+  \"[^"]+"   { [:STRING, text]}
+
+# Identifier
+  [a-z_]+  { [:VARIABLE, text]}
+
+# Operators
   \+      { [:ADD, text] }
   \-      { [:SUBTRACT, text] }
-  \=      { [:ASSIGN, text] }
   \*      { [:MULTIPLY, text] }
   \/      { [:DIVIDE, text] }
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
+  \=      { [:ASSIGN, text]}
+
+# NewLines
   \n      { [:NEWLINE, text]}
-  \"[^"]+"   { [:STRING, text]}
-  [a-z_]+  { [:VARIABLE, text]}
+  
+# CatchAll
   .       # no action
   
 inner

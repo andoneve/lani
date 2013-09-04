@@ -117,4 +117,30 @@ module AST
       g.push_literal(value)
     end
   end
+
+  class VariableNode < Node
+    attr_reader :name
+
+    def initialize(filename, line, name)
+      super
+      @name = name
+    end
+
+    def bytecode(g)
+      pos(g)
+      g.push_literal(name)
+    end
+  end
+
+  class AssignmentNode < Node
+    attr_reader :name, :value
+
+    def initialize(filename, line, name, value)
+      super
+      @name = name
+      @value = value
+    end
+
+  
+  end
 end
