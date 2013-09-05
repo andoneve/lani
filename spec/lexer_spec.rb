@@ -103,7 +103,7 @@ describe Lani::Parser, '#tokenize' do
     expect(tokenize('a = true')).to eq([
       [:VARIABLE, 'a'],
       [:ASSIGN, '='],
-      [:TRUE, 'true'],
+      [:TRUE, true],
     ])
   end
 

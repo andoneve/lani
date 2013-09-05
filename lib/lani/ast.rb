@@ -151,36 +151,29 @@ module AST
   class TrueBooleanNode < Node
     attr_reader :value
 
-    def initialize(filename, line, value)
+    def initialize(filename, line)
       super
-      @value = value
+      @value = true
     end
   end
 
   class FalseBooleanNode < Node
     attr_reader :value
 
-    def initialize(filename, line, value)
+    def initialize(filename, line)
       super
-      @value = value
+      @value = false
     end
   end
 
   class NilBooleanNode < Node
     attr_reader :value
 
-    def initialize(filename, line, value)
+    def initialize(filename, line)
       super
-      @value = value
+      @value = nil
     end
   end
 
-  class ArrayNode < Node
-    attr_reader :body
 
-    def initialize(filename, line, body)
-      super
-      @body = body
-    end
-  end
 end

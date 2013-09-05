@@ -9,9 +9,9 @@ rule
   \"[^"]+"   { [:STRING, text]}
 
   #Keywords
-  true    { [:TRUE, text]}
-  false   { [:FALSE, text]}
-  nil     { [:NIL, text]}
+  true    { [:TRUE, true]}
+  false   { [:FALSE, false]}
+  nil     { [:NIL, nil]}
 
 # Identifier
   [a-z_]+  { [:VARIABLE, text]}

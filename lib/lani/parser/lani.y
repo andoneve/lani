@@ -39,12 +39,11 @@ rule
  
   assignment : variable ASSIGN expression {AST::AssignmentNode.new( filename, lineno, val[0], val[2]) }
 
-  boolean : TRUE { AST::TrueBooleanNode.new( filename, lineno, val[0])}
-          | FALSE { AST::FalseBooleanNode.new( filename, lineno, val[0])}
-          | NIL { AST::BooleanNode.new( filename, lineno, val[0])}
+  boolean : TRUE { AST::TrueBooleanNode.new( filename, lineno)}
+          | FALSE { AST::FalseBooleanNode.new( filename, lineno)}
+          | NIL { AST::NilBooleanNode.new( filename, lineno)}
 
-  array : /* empty array */ { AST::ArrayNode.new( filename, lineno, [])}
-        | integer "," integer {ArrayNode.new( filename, lineno, val[0]), val[2])}
+  
 
 
   expression : number
@@ -54,7 +53,7 @@ rule
              | variable
              | assignment
              | boolean
-             | array
+             
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}
                    | expression SUBTRACT expression {AST::SubtractNode.new( filename, lineno, val[0], val[2])}
