@@ -176,6 +176,29 @@ module Lani
       end
     end
 
+    it 'parses an empty array' do
+      parse('[]') do |expressions|
+        array = expressions.first
+        expect(array).to be_kind_of(AST::ArrayNode)
+        expect(array.value).to eq([])
+      end
+    end
+
+    it 'parses an array with one element' do
+      parse('[1]') do |expressions|
+        array = expressions.first
+        expect(array).to be_kind_of(AST::ArrayNode)
+        expect(array.value).to eq([1])
+      end
+    end
+
+    it 'parses an array with multiple elements' do
+      parse('[1, 2, 3]') do |expressions|
+        array = expressions.first
+        expect(array).to be_kind_of(AST::ArrayNode)
+        expect(array.value).to eq([1, 2, 3])
+      end
+    end
 
   end
 end

@@ -14,6 +14,9 @@ class Lani::Parser
   token TRUE
   token FALSE
   token NIL
+  token LSQBRA
+  token RSQBRA
+  token COMMA
 
 
 
@@ -43,6 +46,9 @@ rule
           | FALSE { AST::FalseBooleanNode.new( filename, lineno)}
           | NIL { AST::NilBooleanNode.new( filename, lineno)}
 
+  array : LSQBRA RSQBRA { AST::ArrayNode.new( filename, lineno, [])}
+        | LSQBRA expression RSQBRA { AST::ArrayNode.new( filename, lineno, val[1])}
+        | LSQBRA expression COMMA expression RSQBRA { AST::ArrayNode.new( filename, lineno, val[1], val[3])}
   
 
 
@@ -53,6 +59,7 @@ rule
              | variable
              | assignment
              | boolean
+             | array
              
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}

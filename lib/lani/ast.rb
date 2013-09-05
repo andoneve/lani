@@ -175,5 +175,14 @@ module AST
     end
   end
 
+  class ArrayNode < Node
+    attr_reader :value
+
+    def initialize(filename, line, value, *args)
+      super
+      @value = value
+    end
+  end
+
 
 end
