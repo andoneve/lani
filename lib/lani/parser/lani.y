@@ -11,6 +11,10 @@ class Lani::Parser
   token STRING
   token VARIABLE
   token ASSIGN
+  token TRUE
+  token FALSE
+  token NIL
+
 
 
   prechigh
@@ -35,12 +39,22 @@ rule
  
   assignment : variable ASSIGN expression {AST::AssignmentNode.new( filename, lineno, val[0], val[2]) }
 
+  boolean : TRUE { AST::TrueBooleanNode.new( filename, lineno, val[0])}
+          | FALSE { AST::FalseBooleanNode.new( filename, lineno, val[0])}
+          | NIL { AST::BooleanNode.new( filename, lineno, val[0])}
+
+  array : /* empty array */ { AST::ArrayNode.new( filename, lineno, [])}
+        | integer "," integer {ArrayNode.new( filename, lineno, val[0]), val[2])}
+
+
   expression : number
              | binary_operation
              | LPAREN expression RPAREN { val[1] }
              | string
              | variable
              | assignment
+             | boolean
+             | array
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}
                    | expression SUBTRACT expression {AST::SubtractNode.new( filename, lineno, val[0], val[2])}

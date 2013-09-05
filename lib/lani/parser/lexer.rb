@@ -66,6 +66,15 @@ class Lani::Parser < Racc::Parser
       when (text = @ss.scan(/\"[^"]+"/))
          action { [:STRING, text]}
 
+      when (text = @ss.scan(/true/))
+         action { [:TRUE, text]}
+
+      when (text = @ss.scan(/false/))
+         action { [:FALSE, text]}
+
+      when (text = @ss.scan(/nil/))
+         action { [:NIL, text]}
+
       when (text = @ss.scan(/[a-z_]+/))
          action { [:VARIABLE, text]}
 

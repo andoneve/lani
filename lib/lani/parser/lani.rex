@@ -8,6 +8,11 @@ rule
   \d+        { [:INTEGER, text.to_i] }
   \"[^"]+"   { [:STRING, text]}
 
+  #Keywords
+  true    { [:TRUE, text]}
+  false   { [:FALSE, text]}
+  nil     { [:NIL, text]}
+
 # Identifier
   [a-z_]+  { [:VARIABLE, text]}
 
@@ -19,6 +24,8 @@ rule
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
   \=      { [:ASSIGN, text]}
+
+
 
 # NewLines
   \n      { [:NEWLINE, text]}

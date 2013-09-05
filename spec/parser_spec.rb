@@ -167,5 +167,22 @@ module Lani
       end
     end
 
+    it 'parses a boolean assignment' do
+      parse('a = true') do |expressions|
+        assignment = expressions.first
+        expect(assignment).to be_kind_of(AST::AssignmentNode)
+        expect(assignment.name.name).to eq('a')
+        expect(assignment.value.value).to eq('true')
+      end
+    end
+
+    it 'parses an empty array' do
+      parse('[]') do |expressions|
+        array = expressions.first
+        expect(array).to be_kind_of(AST::ArrayNode)
+        expect(array.body).to eq('[]')
+      end
+    end
+
   end
 end

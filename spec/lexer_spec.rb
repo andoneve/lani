@@ -91,5 +91,20 @@ describe Lani::Parser, '#tokenize' do
     ])
   end
 
+  it 'tokenizes a variable assignment' do
+    expect(tokenize('vari_able = 1')).to eq([
+      [:VARIABLE, "vari_able"],
+      [:ASSIGN, "="],
+      [:INTEGER, 1],
+    ])
+  end
+
+  it 'tokenizes a boolean assignment' do
+    expect(tokenize('a = true')).to eq([
+      [:VARIABLE, 'a'],
+      [:ASSIGN, '='],
+      [:TRUE, 'true'],
+    ])
+  end
 
 end
