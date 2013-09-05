@@ -37,4 +37,12 @@ describe Lani::Compiler do
     Lani::Compiler.eval('"this is a test string 1234"').should eq('"this is a test string 1234"')
   end
 
+  it 'compiles a variable' do
+    Lani::Compiler.eval("a").should eq("a")
+  end
+
+  it 'compiles a variable assignment' do
+    Lani::Compiler.eval("a = 1\na").should eq(1)
+  end
+
 end

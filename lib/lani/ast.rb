@@ -141,6 +141,11 @@ module AST
       @value = value
     end
 
-  
+    def bytecode(g)
+      pos(g)
+      g.push_literal(name)
+      g.set_local(value)
+    end
   end
+
 end
