@@ -24,6 +24,9 @@ rule
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
   \=      { [:ASSIGN, text]}
+  \[      { [:LSQBRA, text]}
+  \]      { [:RSQBRA, text]}
+  \,      { [:COMMA, text]}
 
 
 

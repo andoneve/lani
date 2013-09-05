@@ -99,6 +99,15 @@ class Lani::Parser < Racc::Parser
       when (text = @ss.scan(/\=/))
          action { [:ASSIGN, text]}
 
+      when (text = @ss.scan(/\[/))
+         action { [:LSQBRA, text]}
+
+      when (text = @ss.scan(/\]/))
+         action { [:RSQBRA, text]}
+
+      when (text = @ss.scan(/\,/))
+         action { [:COMMA, text]}
+
       when (text = @ss.scan(/\n/))
          action { [:NEWLINE, text]}
 

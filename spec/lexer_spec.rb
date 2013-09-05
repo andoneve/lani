@@ -107,4 +107,14 @@ describe Lani::Parser, '#tokenize' do
     ])
   end
 
+  it 'tokenizes an array' do
+    expect(tokenize('[1, 2]')).to eq([
+      [:LSQBRA, '['],
+      [:INTEGER, 1],
+      [:COMMA, ','],
+      [:INTEGER, 2],
+      [:RSQBRA, ']'],
+    ])
+  end
+
 end
