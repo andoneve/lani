@@ -17,6 +17,9 @@ class Lani::Parser
   token LSQBRA
   token RSQBRA
   token COMMA
+  token LCBRA
+  token RCBRA
+  token ROCKET
 
 
 
@@ -47,10 +50,14 @@ rule
 
   array : LSQBRA RSQBRA { AST::ArrayNode.new( filename, lineno, [])}
         | LSQBRA elements RSQBRA { AST::ArrayNode.new( filename, lineno, val[1])}
-        
 
-  elements : expression { [val[0]] }
-           | elements COMMA expression { val[0] << val[2] }
+  hash : LCBRA RCBRA { AST::HashNode.new( filename, lineno, [])}
+       | LCBRA pairs RCBRA { AST::HashNode.new( filename, lineno, val[1])}
+        
+  pairs : pair { [val[0]] }
+        | pairs COMMA pair { val[0] += val[2] }
+
+  pair : expression ROCKET expression { [val[0], val[2]]}
   
 
 
@@ -62,6 +69,7 @@ rule
              | variable_assignment
              | boolean
              | array
+             | hash
 
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}

@@ -23,10 +23,15 @@ rule
   \/      { [:DIVIDE, text] }
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
+  \=>     { [:ROCKET, text]}
   \=      { [:ASSIGN, text]}
   \[      { [:LSQBRA, text]}
   \]      { [:RSQBRA, text]}
   \,      { [:COMMA, text]}
+  \{      { [:LCBRA, text]}
+  \}      { [:RCBRA, text]}
+
+
 
 
 

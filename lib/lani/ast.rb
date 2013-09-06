@@ -210,5 +210,24 @@ module AST
     end
   end
 
+  class HashNode < Node
+    attr_reader :array
+
+    def initialize(filename, line, array)
+      super
+      @array = array
+    end
+
+    def bytecode(g)
+      pos(g)
+      value.each do |element|
+        element.bytecode(g)
+      end
+
+      g.make_array(value.count)
+
+    end
+  end
+
 
 end
