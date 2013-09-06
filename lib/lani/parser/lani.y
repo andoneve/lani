@@ -46,8 +46,11 @@ rule
           | NIL { AST::NilBooleanNode.new( filename, lineno)}
 
   array : LSQBRA RSQBRA { AST::ArrayNode.new( filename, lineno, [])}
-        | LSQBRA expression RSQBRA { AST::ArrayNode.new( filename, lineno, val[1])}
-        | LSQBRA expression COMMA expression RSQBRA { AST::ArrayNode.new( filename, lineno, val[1], val[3])}
+        | LSQBRA elements RSQBRA { AST::ArrayNode.new( filename, lineno, val[1])}
+        
+
+  elements : expression { [val[0]] }
+           | elements COMMA expression { val[0] << val[2] }
   
 
 

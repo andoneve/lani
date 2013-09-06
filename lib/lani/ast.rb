@@ -115,6 +115,7 @@ module AST
     def bytecode(g)
       pos(g)
       g.push_literal(value)
+      g.string_dup
     end
   end
 
@@ -155,6 +156,11 @@ module AST
       super
       @value = true
     end
+
+    def bytecode(g)
+      pos(g)
+      g.push_true
+    end
   end
 
   class FalseBooleanNode < Node
@@ -163,6 +169,11 @@ module AST
     def initialize(filename, line)
       super
       @value = false
+    end
+
+    def bytecode(g)
+      pos(g)
+      g.push_false
     end
   end
 
@@ -173,14 +184,29 @@ module AST
       super
       @value = nil
     end
+
+    def bytecode(g)
+      pos(g)
+      g.push_nil
+    end
   end
 
   class ArrayNode < Node
     attr_reader :value
 
-    def initialize(filename, line, value, *args)
+    def initialize(filename, line, value)
       super
       @value = value
+    end
+
+    def bytecode(g)
+      pos(g)
+      value.each do |element|
+        element.bytecode(g)
+      end
+
+      g.make_array(value.count)
+
     end
   end
 

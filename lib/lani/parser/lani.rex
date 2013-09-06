@@ -6,7 +6,7 @@ rule
 # Literals
   \d+\.\d+   { [:FLOAT, text.to_f] }
   \d+        { [:INTEGER, text.to_i] }
-  \"[^"]+"   { [:STRING, text]}
+  \"[^"]+"   { [:STRING, text[1..-2]]}
 
   #Keywords
   true    { [:TRUE, true]}

@@ -64,7 +64,7 @@ class Lani::Parser < Racc::Parser
          action { [:INTEGER, text.to_i] }
 
       when (text = @ss.scan(/\"[^"]+"/))
-         action { [:STRING, text]}
+         action { [:STRING, text[1..-2]]}
 
       when (text = @ss.scan(/true/))
          action { [:TRUE, true]}
