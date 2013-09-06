@@ -56,7 +56,7 @@ describe Lani::Compiler do
   end
 
   it 'compiles a variable assignment and access' do
-    Lani::Compiler.eval("a = 1").should eq(1)
+    Lani::Compiler.eval("a = 1\na").should eq(1)
   end
 
   it 'compiles an array' do

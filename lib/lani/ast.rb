@@ -24,10 +24,6 @@ module AST
     def bytecode(g)
       g.file = (filename || :"(lani)").to_sym
       pos(g)
-      # p g.state
-      # g.push_state Rubinius::AST::ClosedScope.new(line)
-
-      # p g.state
 
       body.each do |expression|
         expression.bytecode(g)
@@ -35,7 +31,6 @@ module AST
 
       g.local_names = g.state.scope.local_names
       g.local_count = g.state.scope.local_count
-      # g.pop_state
     end
   end
 
@@ -88,7 +83,7 @@ module AST
   end
 
   class SubtractNode < BinaryNode
-    
+
     def bytecode(g)
       pos(g)
       lhs.bytecode(g)
@@ -140,9 +135,8 @@ module AST
 
     def bytecode(g)
       pos(g)
-      g.meta_push_1
-      # local = g.state.scope.search_local(name)
-      # local.get_bytecode(g)
+      local = g.state.scope.search_local(name)
+      local.get_bytecode(g)
     end
   end
 
@@ -158,9 +152,8 @@ module AST
     def bytecode(g)
       pos(g)
       value.bytecode(g)
-      # local = g.state.scope.new_local(name)
-      g.set_local 0
-      # local.reference.set_bytecode(g)
+      local = g.state.scope.new_local(name)
+      local.reference.set_bytecode(g)
     end
 
   end
@@ -223,5 +216,4 @@ module AST
       g.make_array value.length
     end
   end
-
 end
