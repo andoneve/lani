@@ -158,21 +158,20 @@ module Lani
       end
     end
 
-    it 'parses a variable assignment' do
-      parse('a = 1') do |expressions|
+    it 'parses a variable access' do
+      parse('a') do |expressions|
         assignment = expressions.first
-        expect(assignment).to be_kind_of(AST::AssignmentNode)
-        expect(assignment.name.name).to eq('a')
-        expect(assignment.value.value).to eq(1)
+        expect(assignment).to be_kind_of(AST::VariableAccessNode)
+        expect(assignment.name).to eq('a')
       end
     end
 
-    it 'parses a boolean assignment' do
-      parse('a = true') do |expressions|
+    it 'parses a variable assignment' do
+      parse('a = 1') do |expressions|
         assignment = expressions.first
-        expect(assignment).to be_kind_of(AST::AssignmentNode)
-        expect(assignment.name.name).to eq('a')
-        expect(assignment.value.value).to eq(true)
+        expect(assignment).to be_kind_of(AST::VariableAssignmentNode)
+        expect(assignment.name).to eq('a')
+        expect(assignment.value.value).to eq(1)
       end
     end
 

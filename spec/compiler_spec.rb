@@ -37,8 +37,26 @@ describe Lani::Compiler do
     Lani::Compiler.eval('"this is a test string 1234"').should eq('this is a test string 1234')
   end
 
-  it 'compiles a variable' do
+  it 'makes a duplicate of the string literal' do
+    result = Lani::Compiler.eval('["foo", "foo"]')
+    result.first.gsub!("f", "b")
+    result.last.should eq("foo")
+  end
+
+  it 'compiles an identifier' do
     Lani::Compiler.eval("a").should eq("a")
+  end
+
+  it 'compiles a true boolean' do
+    Lani::Compiler.eval("true").should eq(true)
+  end
+
+  it 'compiles a false boolean' do
+    Lani::Compiler.eval("false").should eq(false)
+  end
+
+  it 'compiles a nil boolean' do
+    Lani::Compiler.eval("nil").should eq(nil)
   end
 
   # it 'compiles a variable assignment' do
