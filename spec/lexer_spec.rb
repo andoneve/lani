@@ -109,4 +109,13 @@ describe Lani::Parser, '#tokenize' do
     ])
   end
 
+  it 'tokenizes a hash' do
+    expect(tokenize('{1 => 2}')).to eq([
+      [:LCBRA,  '{'],
+      [:INTEGER, 1],
+      [:ROCKET, '=>'],
+      [:INTEGER, 2],
+      [:RCBRA,  '}'],
+    ])
+  end
 end
