@@ -118,7 +118,7 @@ module AST
     end
   end
 
-  class VariableNode < Node
+  class VariableAccessNode < Node
     attr_reader :name
 
     def initialize(filename, line, name)
@@ -132,7 +132,7 @@ module AST
     end
   end
 
-  class AssignmentNode < Node
+  class VariableAssignmentNode < Node
     attr_reader :name, :value
 
     def initialize(filename, line, name, value)

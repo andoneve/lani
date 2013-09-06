@@ -14,7 +14,7 @@ rule
   nil     { [:NIL, nil]}
 
 # Identifier
-  [a-z_]+  { [:VARIABLE, text]}
+  [a-z_]+  { [:IDENTIFIER, text]}
 
 # Operators
   \+      { [:ADD, text] }

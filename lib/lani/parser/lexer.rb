@@ -76,7 +76,7 @@ class Lani::Parser < Racc::Parser
          action { [:NIL, nil]}
 
       when (text = @ss.scan(/[a-z_]+/))
-         action { [:VARIABLE, text]}
+         action { [:IDENTIFIER, text]}
 
       when (text = @ss.scan(/\+/))
          action { [:ADD, text] }
