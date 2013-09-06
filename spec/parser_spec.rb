@@ -154,7 +154,7 @@ module Lani
       parse('"this is a test string 1234"') do |expressions|
         string = expressions.first
         expect(string).to be_kind_of(AST::StringNode)
-        expect(string.value).to eq('"this is a test string 1234"')
+        expect(string.value).to eq('this is a test string 1234')
       end
     end
 
@@ -188,7 +188,10 @@ module Lani
       parse('[1]') do |expressions|
         array = expressions.first
         expect(array).to be_kind_of(AST::ArrayNode)
-        expect(array.value).to eq([1])
+        expect(array.value.length).to eq(1)
+        element = array.value.first
+        expect(element).to be_kind_of(AST::IntegerNode)
+        expect(element.value).to eq(1)
       end
     end
 
@@ -196,7 +199,14 @@ module Lani
       parse('[1, 2, 3]') do |expressions|
         array = expressions.first
         expect(array).to be_kind_of(AST::ArrayNode)
-        expect(array.value).to eq([1, 2, 3])
+        first, second, third = array.value
+
+        expect(first).to be_kind_of(AST::IntegerNode)
+        expect(first.value).to eq(1)
+        expect(second).to be_kind_of(AST::IntegerNode)
+        expect(second.value).to eq(2)
+        expect(third).to be_kind_of(AST::IntegerNode)
+        expect(third.value).to eq(3)
       end
     end
 

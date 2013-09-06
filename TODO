@@ -1,0 +1,5 @@
+* Compile booleans
+* Duplicate string literals
+* Compile arrays
+* Compile variable assignments
+* Strip quotes from string literals

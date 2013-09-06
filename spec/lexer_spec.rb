@@ -70,7 +70,7 @@ describe Lani::Parser, '#tokenize' do
 
   it 'tokenizes a string' do
     expect(tokenize('"this is a test string 1234"')).to eq([
-      [:STRING, '"this is a test string 1234"'],
+      [:STRING, 'this is a test string 1234'],
     ])
   end
 
@@ -78,7 +78,7 @@ describe Lani::Parser, '#tokenize' do
     expect(tokenize('1 + "this is a test string 1234" + 2')).to eq([
       [:INTEGER, 1],
       [:ADD, "+"],
-      [:STRING, '"this is a test string 1234"'],
+      [:STRING, 'this is a test string 1234'],
       [:ADD, "+"],
       [:INTEGER, 2],
     ])
