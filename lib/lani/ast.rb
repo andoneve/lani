@@ -22,9 +22,20 @@ module AST
     end
 
     def bytecode(g)
+      g.file = (filename || :"(lani)").to_sym
+      pos(g)
+      # p g.state
+      # g.push_state Rubinius::AST::ClosedScope.new(line)
+
+      # p g.state
+
       body.each do |expression|
         expression.bytecode(g)
       end
+
+      g.local_names = g.state.scope.local_names
+      g.local_count = g.state.scope.local_count
+      # g.pop_state
     end
   end
 
@@ -129,7 +140,9 @@ module AST
 
     def bytecode(g)
       pos(g)
-      g.push_literal(name)
+      g.meta_push_1
+      # local = g.state.scope.search_local(name)
+      # local.get_bytecode(g)
     end
   end
 
@@ -144,9 +157,12 @@ module AST
 
     def bytecode(g)
       pos(g)
-      g.push_literal(name)
-      g.set_local(value)
+      value.bytecode(g)
+      # local = g.state.scope.new_local(name)
+      g.set_local 0
+      # local.reference.set_bytecode(g)
     end
+
   end
 
   class TrueBooleanNode < Node
@@ -204,11 +220,8 @@ module AST
       value.each do |element|
         element.bytecode(g)
       end
-
-      g.make_array(value.count)
-
+      g.make_array value.length
     end
   end
-
 
 end

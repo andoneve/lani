@@ -34,6 +34,35 @@ module Lani
       be.call_on_instance(instance)
     end
 
+    def self.compile_eval(string, variable_scope, file="(eval)", line=1)
+      if ec = @eval_cache
+        layout = variable_scope.local_layout
+        if code = ec.retrieve([string, layout, line])
+          return code
+        end
+      end
+
+      compiler = new :eval, :compiled_code
+
+      parser = compiler.parser
+      parser.root Rubinius::AST::EvalExpression
+      parser.default_transforms
+      parser.input string, file, line
+
+      compiler.generator.variable_scope = variable_scope
+
+      code = compiler.run
+
+      code.add_metadata :for_eval, true
+
+      if ec and parser.should_cache?
+        ec.set([string.dup, layout, line], code)
+      end
+
+      return code
+
+    end
+
     class Generator < Rubinius::Compiler::Generator
       Stages[:bytecode] = self
       next_stage Rubinius::Compiler::Encoder
@@ -42,6 +71,14 @@ module Lani
         super
       ensure
         @processor = Lani::Generator
+      end
+
+      def run
+        @output = @processor.new
+        @input.variable_scope = @variable_scope
+        @input.bytecode @output
+        @output.close
+        run_next
       end
     end
 

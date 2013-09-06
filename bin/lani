@@ -6,6 +6,8 @@ $LOAD_PATH.unshift(File.expand_path('../../lib', file))
 
 require 'lani'
 
+disassemble = false
+
 options = Rubinius::Options.new "Usage: #$0 [options] [program]", 20
 
 options.on "-h", "--help", "Display this help" do 
@@ -17,6 +19,19 @@ end
 options.on "-v", "--version", "Show version" do 
 	puts "Lani #{Lani::VERSION}"
 	exit 0
+end
+
+options.on "-B", "--print-bytecode", "Print bytecode" do 
+  disassemble = true
+end
+
+options.on "-e", "CODE", "Execute code" do |code|
+  if disassemble
+    puts Lani::Compiler.compile_string(code).decode
+  else
+    Lani::Compiler.eval(code)
+  end
+  exit 0
 end
 
 options.parse(ARGV)

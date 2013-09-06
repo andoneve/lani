@@ -46,13 +46,10 @@ rule
           | NIL { AST::NilBooleanNode.new( filename, lineno)}
 
   array : LSQBRA RSQBRA { AST::ArrayNode.new( filename, lineno, [])}
-        | LSQBRA elements RSQBRA { AST::ArrayNode.new( filename, lineno, val[1])}
-        
+        | LSQBRA elements RSQBRA { AST::ArrayNode.new( filename, lineno, val[1]) }
 
   elements : expression { [val[0]] }
            | elements COMMA expression { val[0] << val[2] }
-  
-
 
   expression : number
              | binary_operation

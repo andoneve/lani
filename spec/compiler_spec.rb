@@ -43,10 +43,6 @@ describe Lani::Compiler do
     result.last.should eq("foo")
   end
 
-  it 'compiles an identifier' do
-    Lani::Compiler.eval("a").should eq("a")
-  end
-
   it 'compiles a true boolean' do
     Lani::Compiler.eval("true").should eq(true)
   end
@@ -59,15 +55,15 @@ describe Lani::Compiler do
     Lani::Compiler.eval("nil").should eq(nil)
   end
 
-  # it 'compiles a variable assignment' do
-  #   Lani::Compiler.eval("a = 1\\na").should eq(1)
-  # end
+  it 'compiles a variable assignment and access' do
+    Lani::Compiler.eval("a = 1").should eq(1)
+  end
 
   it 'compiles an array' do
     Lani::Compiler.eval("[1, 2 + 4, \"foo\", [3]]").should eq([1, 6, "foo", [3]])
   end
 
-  it 'compiles a hash' do
-    Lani::Compiler.eval("{1 => 12, \"foo\" => 98}").should eq({1 => 12, "foo" => 98})
-  end
+  # it 'compiles a hash' do
+  #   Lani::Compiler.eval("{1 => 12, \\"foo\\" => 98}").should eq({1 => 12, "foo" => 98})
+  # end
 end

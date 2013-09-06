@@ -11,7 +11,7 @@ require_relative 'lexer'
 module Lani
   class Parser < Racc::Parser
 
-module_eval(<<'...end lani.y/module_eval...', 'lani.y', 84)
+module_eval(<<'...end lani.y/module_eval...', 'lani.y', 81)
 
 def filename
   @filename
@@ -294,17 +294,17 @@ module_eval(<<'.,.,', 'lani.y', 47)
 
 module_eval(<<'.,.,', 'lani.y', 48)
   def _reduce_13(val, _values)
-     AST::ArrayNode.new( filename, lineno, val[1])
+     AST::ArrayNode.new( filename, lineno, val[1]) 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 51)
+module_eval(<<'.,.,', 'lani.y', 50)
   def _reduce_14(val, _values)
      [val[0]] 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 52)
+module_eval(<<'.,.,', 'lani.y', 51)
   def _reduce_15(val, _values)
      val[0] << val[2] 
   end
@@ -314,7 +314,7 @@ module_eval(<<'.,.,', 'lani.y', 52)
 
 # reduce 17 omitted
 
-module_eval(<<'.,.,', 'lani.y', 58)
+module_eval(<<'.,.,', 'lani.y', 55)
   def _reduce_18(val, _values)
      val[1] 
   end
@@ -330,37 +330,37 @@ module_eval(<<'.,.,', 'lani.y', 58)
 
 # reduce 23 omitted
 
-module_eval(<<'.,.,', 'lani.y', 66)
+module_eval(<<'.,.,', 'lani.y', 63)
   def _reduce_24(val, _values)
     AST::AddNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 67)
+module_eval(<<'.,.,', 'lani.y', 64)
   def _reduce_25(val, _values)
     AST::SubtractNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 68)
+module_eval(<<'.,.,', 'lani.y', 65)
   def _reduce_26(val, _values)
     AST::MultiplyNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 69)
+module_eval(<<'.,.,', 'lani.y', 66)
   def _reduce_27(val, _values)
     AST::DivideNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 71)
+module_eval(<<'.,.,', 'lani.y', 68)
   def _reduce_28(val, _values)
      [val[0]] 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 72)
+module_eval(<<'.,.,', 'lani.y', 69)
   def _reduce_29(val, _values)
      val[0] << val[2] 
   end

@@ -208,35 +208,35 @@ module Lani
         expect(third.value).to eq(3)
       end
     end
-
-    it 'parses an empty hash' do
-      parse('{}') do |expressions|
-        hash = expressions.first
-        expect(hash).to be_kind_of(AST::HashNode)
-        expect(hash.array.length).to eq(0)
-      end
-    end
-
-    it 'parses a map with one key and one value' do
-      parse('{3 => 4}') do |expressions|
-        hash = expressions.first
-        expect(hash).to be_kind_of(AST::HashNode)
-        expect(hash.array.length).to eq(2)
-        expect(hash.array.first.value).to eq(3)
-        expect(hash.array.last.value).to eq(4)
-      end
-    end
-
-    it 'parses a map with multiple keys and values' do
-      parse('{3 => 4, "foo" => 234}') do |expressions|
-        hash = expressions.first
-        expect(hash).to be_kind_of(AST::HashNode)
-        expect(hash.array.length).to eq(2)
-        expect(hash.array[0].value).to eq(3)
-        expect(hash.array[1].value).to eq(4)
-        expect(hash.array[2].value).to eq("foo")
-        expect(hash.array[3].value).to eq(234)
-      end
-    end
+# 
+#     it 'parses an empty hash' do
+#       parse('{}') do |expressions|
+#         hash = expressions.first
+#         expect(hash).to be_kind_of(AST::HashNode)
+#         expect(hash.array.length).to eq(0)
+#       end
+#     end
+# 
+#     it 'parses a map with one key and one value' do
+#       parse('{3 => 4}') do |expressions|
+#         hash = expressions.first
+#         expect(hash).to be_kind_of(AST::HashNode)
+#         expect(hash.array.length).to eq(2)
+#         expect(hash.array.first.value).to eq(3)
+#         expect(hash.array.last.value).to eq(4)
+#       end
+#     end
+# 
+#     it 'parses a map with multiple keys and values' do
+#       parse('{3 => 4, "foo" => 234}') do |expressions|
+#         hash = expressions.first
+#         expect(hash).to be_kind_of(AST::HashNode)
+#         expect(hash.array.length).to eq(2)
+#         expect(hash.array[0].value).to eq(3)
+#         expect(hash.array[1].value).to eq(4)
+#         expect(hash.array[2].value).to eq("foo")
+#         expect(hash.array[3].value).to eq(234)
+#       end
+    # end
   end
 end
