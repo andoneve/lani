@@ -42,7 +42,7 @@ rule
 
   variable_access : IDENTIFIER { AST::VariableAccessNode.new( filename, lineno, val[0])}
  
-  variable_assignment : IDENTIFIER ASSIGN expression {AST::VariableAssignmentNode.new( filename, lineno, val[0], val[2]) }
+  variable_assignment : IDENTIFIER ASSIGN expression { AST::VariableAssignmentNode.new( filename, lineno, val[0], val[2]) }
 
   boolean : TRUE { AST::TrueBooleanNode.new( filename, lineno)}
           | FALSE { AST::FalseBooleanNode.new( filename, lineno)}
@@ -51,11 +51,14 @@ rule
   array : LSQBRA RSQBRA { AST::ArrayNode.new( filename, lineno, [])}
         | LSQBRA elements RSQBRA { AST::ArrayNode.new( filename, lineno, val[1])}
 
+  elements : expression { [val[0]] }
+           | elements COMMA expression { val[0] << val[2] }
+
   hash : LCBRA RCBRA { AST::HashNode.new( filename, lineno, [])}
        | LCBRA pairs RCBRA { AST::HashNode.new( filename, lineno, val[1])}
         
   pairs : pair { [val[0]] }
-        | pairs COMMA pair { val[0] += val[2] }
+        | pairs COMMA pair { val[0] << val[2] }
 
   pair : expression ROCKET expression { [val[0], val[2]]}
   

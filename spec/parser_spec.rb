@@ -221,9 +221,11 @@ module Lani
       parse('{3 => 4}') do |expressions|
         hash = expressions.first
         expect(hash).to be_kind_of(AST::HashNode)
-        expect(hash.array.length).to eq(2)
-        expect(hash.array.first.value).to eq(3)
-        expect(hash.array.last.value).to eq(4)
+        expect(hash.array.length).to eq(1)
+        #require 'rubinius/debugger'
+        #Rubinius::Debugger.here
+        expect(hash.array[0].first.value).to eq(3)
+        expect(hash.array[0].last.value).to eq(4)
       end
     end
 
@@ -232,10 +234,14 @@ module Lani
         hash = expressions.first
         expect(hash).to be_kind_of(AST::HashNode)
         expect(hash.array.length).to eq(2)
-        expect(hash.array[0].value).to eq(3)
-        expect(hash.array[1].value).to eq(4)
-        expect(hash.array[2].value).to eq("foo")
-        expect(hash.array[3].value).to eq(234)
+        puts "=============I AM HERE=================="
+        #require 'rubinius/debugger'
+        #Rubinius::Debugger.here
+        puts hash.array[0].inspect
+        expect(hash.array[0][0].value).to eq(3)
+        expect(hash.array[0][1].value).to eq(4)
+        expect(hash.array[1][0].value).to eq("foo")
+        expect(hash.array[1][1].value).to eq(234)
       end
     end
   end
