@@ -220,14 +220,18 @@ module AST
 
     def bytecode(g)
       pos(g)
-      value.each do |element|
+      array.each do |element|
         element.bytecode(g)
       end
-
-      g.make_array(value.count)
-
+      g.push_cpath_top
+      g.find_constant :Hash
+      g.push 
+      g.send :new_from_literal, 1
+      g.dup_top
+      g.push
+      g.push
+      g.send :[]=, 2
+      g.pop
     end
   end
-
-
 end
