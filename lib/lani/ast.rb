@@ -22,9 +22,6 @@ module AST
     end
 
     def bytecode(g)
-      body.each do |expression|
-        expression.bytecode(g)
-      end
     end
   end
 
@@ -37,8 +34,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push value
     end
   end
 
@@ -51,8 +46,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push_literal(value)
     end
   end
 
@@ -69,38 +62,22 @@ module AST
   class AddNode < BinaryNode
 
     def bytecode(g)
-      pos(g)
-      lhs.bytecode(g)
-      rhs.bytecode(g)
-      g.send(:+, 1)
     end
   end
 
   class SubtractNode < BinaryNode
-    
+
     def bytecode(g)
-      pos(g)
-      lhs.bytecode(g)
-      rhs.bytecode(g)
-      g.send(:-, 1)
     end
   end
 
   class MultiplyNode < BinaryNode
     def bytecode(g)
-      pos(g)
-      lhs.bytecode(g)
-      rhs.bytecode(g)
-      g.send(:*, 1)
     end
   end
 
   class DivideNode < BinaryNode
     def bytecode(g)
-      pos(g)
-      lhs.bytecode(g)
-      rhs.bytecode(g)
-      g.send(:/, 1)
     end
   end
 
@@ -113,9 +90,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push_literal(value)
-      g.string_dup
     end
   end
 
@@ -128,8 +102,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push_literal(name)
     end
   end
 
@@ -143,9 +115,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push_literal(name)
-      g.set_local(value)
     end
   end
 
@@ -158,8 +127,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push_true
     end
   end
 
@@ -172,8 +139,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push_false
     end
   end
 
@@ -186,8 +151,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      g.push_nil
     end
   end
 
@@ -200,13 +163,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      value.each do |element|
-        element.bytecode(g)
-      end
-
-      g.make_array(value.count)
-
     end
   end
 
@@ -219,19 +175,6 @@ module AST
     end
 
     def bytecode(g)
-      pos(g)
-      array.each do |element|
-        element.bytecode(g)
-      end
-      g.push_cpath_top
-      g.find_constant :Hash
-      g.push 
-      g.send :new_from_literal, 1
-      g.dup_top
-      g.push
-      g.push
-      g.send :[]=, 2
-      g.pop
     end
   end
 end
