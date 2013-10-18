@@ -16,29 +16,30 @@ class Lani::Parser
   token NIL
   token LSQBRA
   token RSQBRA
+  token LCBRA
+  token RCBRA
+  token ROCKET
   token COMMA
-
-
 
   prechigh
     left MULTIPLY DIVIDE
     left ADD SUBTRACT
   preclow
 
-  options no_result_var 
+  options no_result_var
 rule
   root : program
-  
+
   program : /* nothing */ { AST::Program.new( filename, lineno, [])}
           | expressions   { AST::Program.new( filename, lineno, val[0])}
-  
+
   number : INTEGER { AST::IntegerNode.new( filename, lineno, val[0])}
          | FLOAT   { AST::FloatNode.new( filename, lineno, val[0])}
 
   string : STRING { AST::StringNode.new( filename, lineno, val[0])}
 
   variable_access : IDENTIFIER { AST::VariableAccessNode.new( filename, lineno, val[0])}
- 
+
   variable_assignment : IDENTIFIER ASSIGN expression {AST::VariableAssignmentNode.new( filename, lineno, val[0], val[2]) }
 
   boolean : TRUE { AST::TrueBooleanNode.new( filename, lineno)}
@@ -51,6 +52,14 @@ rule
   elements : expression { [val[0]] }
            | elements COMMA expression { val[0] << val[2] }
 
+  hash : LCBRA RCBRA { AST::HashNode.new(filename, lineno, []) }
+       | LCBRA pairs RCBRA { AST::HashNode.new(filename, lineno, val[1]) }
+
+  pairs : pair
+        | pairs COMMA pair { val[0] + val[2] }
+
+  pair : expression ROCKET expression { [val[0], val[2]] }
+
   expression : number
              | binary_operation
              | LPAREN expression RPAREN { val[1] }
@@ -59,6 +68,7 @@ rule
              | variable_assignment
              | boolean
              | array
+             | hash
 
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}

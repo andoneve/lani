@@ -11,7 +11,7 @@ require_relative 'lexer'
 module Lani
   class Parser < Racc::Parser
 
-module_eval(<<'...end lani.y/module_eval...', 'lani.y', 81)
+module_eval(<<'...end lani.y/module_eval...', 'lani.y', 91)
 
 def filename
   @filename
@@ -32,113 +32,137 @@ end
 ##### State transition tables begin ###
 
 racc_action_table = [
-     4,     5,    29,    30,    31,    32,    21,    38,    14,     6,
-     7,    23,     8,     9,    10,    11,    25,     4,     5,    29,
-    30,    31,    32,    36,    37,    14,     6,     7,    24,     8,
-     9,    10,    11,     4,     5,    29,    30,    31,    32,    31,
-    32,    14,     6,     7,    33,     8,     9,    10,    11,     4,
-     5,    29,    30,    31,    32,    31,    32,    14,     6,     7,
-   nil,     8,     9,    10,    11,     4,     5,    29,    30,    31,
-    32,   nil,   nil,    14,     6,     7,   nil,     8,     9,    10,
-    11,     4,     5,    29,    30,    31,    32,   nil,   nil,    14,
-     6,     7,   nil,     8,     9,    10,    11,     4,     5,   nil,
-   nil,   nil,   nil,   nil,   nil,    14,     6,     7,   nil,     8,
-     9,    10,    11,     4,     5,   nil,   nil,   nil,   nil,   nil,
-   nil,    14,     6,     7,   nil,     8,     9,    10,    11,     4,
-     5,   nil,   nil,   nil,   nil,   nil,   nil,    14,     6,     7,
-   nil,     8,     9,    10,    11,     4,     5,   nil,   nil,   nil,
-   nil,   nil,   nil,    14,     6,     7,   nil,     8,     9,    10,
-    11 ]
+     4,     5,    37,    38,    35,    36,    37,    38,    15,     6,
+     7,    23,     8,     9,    10,    11,    25,    12,    30,     4,
+     5,    46,    42,    44,    26,    45,    43,    15,     6,     7,
+    39,     8,     9,    10,    11,   nil,    12,     4,     5,    35,
+    36,    37,    38,   nil,    47,    15,     6,     7,   nil,     8,
+     9,    10,    11,    27,    12,     4,     5,    35,    36,    37,
+    38,    37,    38,    15,     6,     7,   nil,     8,     9,    10,
+    11,   nil,    12,     4,     5,    35,    36,    37,    38,   nil,
+   nil,    15,     6,     7,   nil,     8,     9,    10,    11,   nil,
+    12,     4,     5,    35,    36,    37,    38,   nil,   nil,    15,
+     6,     7,   nil,     8,     9,    10,    11,   nil,    12,     4,
+     5,    35,    36,    37,    38,   nil,   nil,    15,     6,     7,
+   nil,     8,     9,    10,    11,   nil,    12,     4,     5,    35,
+    36,    37,    38,   nil,   nil,    15,     6,     7,   nil,     8,
+     9,    10,    11,   nil,    12,     4,     5,    35,    36,    37,
+    38,   nil,   nil,    15,     6,     7,   nil,     8,     9,    10,
+    11,   nil,    12,     4,     5,   nil,   nil,   nil,   nil,   nil,
+   nil,    15,     6,     7,   nil,     8,     9,    10,    11,   nil,
+    12,     4,     5,   nil,   nil,   nil,   nil,   nil,   nil,    15,
+     6,     7,   nil,     8,     9,    10,    11,   nil,    12,     4,
+     5,   nil,   nil,   nil,   nil,   nil,   nil,    15,     6,     7,
+   nil,     8,     9,    10,    11,   nil,    12,     4,     5,   nil,
+   nil,   nil,   nil,   nil,   nil,    15,     6,     7,   nil,     8,
+     9,    10,    11,   nil,    12 ]
 
 racc_action_check = [
-    11,    11,    28,    28,    28,    28,     1,    28,    11,    11,
-    11,     3,    11,    11,    11,    11,    11,     0,     0,    20,
-    20,    20,    20,    26,    26,     0,     0,     0,     7,     0,
-     0,     0,     0,    14,    14,    27,    27,    27,    27,    39,
-    39,    14,    14,    14,    21,    14,    14,    14,    14,    22,
-    22,    34,    34,    34,    34,    40,    40,    22,    22,    22,
-   nil,    22,    22,    22,    22,    24,    24,    35,    35,    35,
-    35,   nil,   nil,    24,    24,    24,   nil,    24,    24,    24,
-    24,    29,    29,    43,    43,    43,    43,   nil,   nil,    29,
-    29,    29,   nil,    29,    29,    29,    29,    30,    30,   nil,
-   nil,   nil,   nil,   nil,   nil,    30,    30,    30,   nil,    30,
-    30,    30,    30,    31,    31,   nil,   nil,   nil,   nil,   nil,
-   nil,    31,    31,    31,   nil,    31,    31,    31,    31,    32,
-    32,   nil,   nil,   nil,   nil,   nil,   nil,    32,    32,    32,
-   nil,    32,    32,    32,    32,    37,    37,   nil,   nil,   nil,
-   nil,   nil,   nil,    37,    37,    37,   nil,    37,    37,    37,
-    37 ]
+    12,    12,    48,    48,    33,    33,    33,    33,    12,    12,
+    12,     1,    12,    12,    12,    12,     3,    12,    12,     0,
+     0,    33,    28,    31,     7,    31,    28,     0,     0,     0,
+    23,     0,     0,     0,     0,   nil,     0,    11,    11,    34,
+    34,    34,    34,   nil,    34,    11,    11,    11,   nil,    11,
+    11,    11,    11,    11,    11,    15,    15,    22,    22,    22,
+    22,    49,    49,    15,    15,    15,   nil,    15,    15,    15,
+    15,   nil,    15,    24,    24,    29,    29,    29,    29,   nil,
+   nil,    24,    24,    24,   nil,    24,    24,    24,    24,   nil,
+    24,    26,    26,    40,    40,    40,    40,   nil,   nil,    26,
+    26,    26,   nil,    26,    26,    26,    26,   nil,    26,    35,
+    35,    41,    41,    41,    41,   nil,   nil,    35,    35,    35,
+   nil,    35,    35,    35,    35,   nil,    35,    36,    36,    52,
+    52,    52,    52,   nil,   nil,    36,    36,    36,   nil,    36,
+    36,    36,    36,   nil,    36,    37,    37,    54,    54,    54,
+    54,   nil,   nil,    37,    37,    37,   nil,    37,    37,    37,
+    37,   nil,    37,    38,    38,   nil,   nil,   nil,   nil,   nil,
+   nil,    38,    38,    38,   nil,    38,    38,    38,    38,   nil,
+    38,    43,    43,   nil,   nil,   nil,   nil,   nil,   nil,    43,
+    43,    43,   nil,    43,    43,    43,    43,   nil,    43,    45,
+    45,   nil,   nil,   nil,   nil,   nil,   nil,    45,    45,    45,
+   nil,    45,    45,    45,    45,   nil,    45,    46,    46,   nil,
+   nil,   nil,   nil,   nil,   nil,    46,    46,    46,   nil,    46,
+    46,    46,    46,   nil,    46 ]
 
 racc_action_pointer = [
-    15,     6,   nil,     3,   nil,   nil,   nil,    15,   nil,   nil,
-   nil,    -2,   nil,   nil,    31,   nil,   nil,   nil,   nil,   nil,
-    15,    44,    47,   nil,    63,   nil,     5,    31,    -2,    79,
-    95,   111,   127,   nil,    47,    63,   nil,   143,   nil,    33,
-    49,   nil,   nil,    79 ]
+    17,    11,   nil,     8,   nil,   nil,   nil,    11,   nil,   nil,
+   nil,    35,    -2,   nil,   nil,    53,   nil,   nil,   nil,   nil,
+   nil,   nil,    53,    30,    71,   nil,    89,   nil,     4,    71,
+   nil,     3,   nil,     0,    35,   107,   125,   143,   161,   nil,
+    89,   107,   nil,   179,   nil,   197,   215,   nil,    -4,    55,
+   nil,   nil,   125,   nil,   143 ]
 
 racc_action_default = [
-    -2,   -31,    -1,    -3,    -4,    -5,    -6,    -7,    -9,   -10,
-   -11,   -31,   -16,   -17,   -31,   -19,   -20,   -21,   -22,   -23,
-   -28,   -31,   -31,   -30,   -31,   -12,   -31,   -14,   -31,   -31,
-   -31,   -31,   -31,    44,   -29,    -8,   -13,   -31,   -18,   -24,
-   -25,   -26,   -27,   -15 ]
+    -2,   -37,    -1,    -3,    -4,    -5,    -6,    -7,    -9,   -10,
+   -11,   -37,   -37,   -21,   -22,   -37,   -24,   -25,   -26,   -27,
+   -28,   -29,   -34,   -37,   -37,   -36,   -37,   -12,   -37,   -14,
+   -16,   -37,   -18,   -37,   -37,   -37,   -37,   -37,   -37,    55,
+   -35,    -8,   -13,   -37,   -17,   -37,   -37,   -23,   -30,   -31,
+   -32,   -33,   -15,   -19,   -20 ]
 
 racc_goto_table = [
-    20,     1,     2,     3,    26,    22,   nil,   nil,   nil,   nil,
-   nil,    27,   nil,   nil,    28,   nil,   nil,   nil,   nil,   nil,
-   nil,   nil,    34,   nil,    35,   nil,   nil,   nil,   nil,    39,
-    40,    41,    42,   nil,   nil,   nil,   nil,    43 ]
+    22,    32,     1,     2,     3,    28,    31,    24,   nil,   nil,
+   nil,    29,   nil,   nil,   nil,    34,   nil,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,    40,   nil,    41,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,    53,    48,    49,    50,    51,   nil,
+   nil,   nil,   nil,    52,   nil,   nil,    54 ]
 
 racc_goto_check = [
-     8,     1,     2,     3,    11,    13,   nil,   nil,   nil,   nil,
-   nil,     8,   nil,   nil,     8,   nil,   nil,   nil,   nil,   nil,
-   nil,   nil,     8,   nil,     8,   nil,   nil,   nil,   nil,     8,
-     8,     8,     8,   nil,   nil,   nil,   nil,     8 ]
+     8,    14,     1,     2,     3,    11,    13,    16,   nil,   nil,
+   nil,     8,   nil,   nil,   nil,     8,   nil,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,     8,   nil,     8,   nil,   nil,   nil,
+   nil,   nil,   nil,   nil,    14,     8,     8,     8,     8,   nil,
+   nil,   nil,   nil,     8,   nil,   nil,     8 ]
 
 racc_goto_pointer = [
-   nil,     1,     2,     3,   nil,   nil,   nil,   nil,     0,   nil,
-   nil,    -7,   nil,     2 ]
+   nil,     2,     3,     4,   nil,   nil,   nil,   nil,     0,   nil,
+   nil,    -6,   nil,    -6,   -11,   nil,     4 ]
 
 racc_goto_default = [
-   nil,   nil,   nil,   nil,    12,    15,    16,    17,   nil,    18,
-    19,   nil,    13,   nil ]
+   nil,   nil,   nil,   nil,    13,    16,    17,    18,    33,    19,
+    20,   nil,    21,   nil,   nil,    14,   nil ]
 
 racc_reduce_table = [
   0, 0, :racc_error,
-  1, 21, :_reduce_none,
-  0, 22, :_reduce_2,
-  1, 22, :_reduce_3,
-  1, 24, :_reduce_4,
-  1, 24, :_reduce_5,
-  1, 25, :_reduce_6,
-  1, 26, :_reduce_7,
-  3, 27, :_reduce_8,
-  1, 29, :_reduce_9,
-  1, 29, :_reduce_10,
-  1, 29, :_reduce_11,
-  2, 30, :_reduce_12,
-  3, 30, :_reduce_13,
-  1, 31, :_reduce_14,
-  3, 31, :_reduce_15,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  3, 28, :_reduce_18,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  1, 28, :_reduce_none,
-  3, 32, :_reduce_24,
-  3, 32, :_reduce_25,
-  3, 32, :_reduce_26,
-  3, 32, :_reduce_27,
-  1, 23, :_reduce_28,
-  3, 23, :_reduce_29,
-  1, 33, :_reduce_none ]
+  1, 24, :_reduce_none,
+  0, 25, :_reduce_2,
+  1, 25, :_reduce_3,
+  1, 27, :_reduce_4,
+  1, 27, :_reduce_5,
+  1, 28, :_reduce_6,
+  1, 29, :_reduce_7,
+  3, 30, :_reduce_8,
+  1, 32, :_reduce_9,
+  1, 32, :_reduce_10,
+  1, 32, :_reduce_11,
+  2, 33, :_reduce_12,
+  3, 33, :_reduce_13,
+  1, 34, :_reduce_14,
+  3, 34, :_reduce_15,
+  2, 35, :_reduce_16,
+  3, 35, :_reduce_17,
+  1, 36, :_reduce_none,
+  3, 36, :_reduce_19,
+  3, 37, :_reduce_20,
+  1, 31, :_reduce_none,
+  1, 31, :_reduce_none,
+  3, 31, :_reduce_23,
+  1, 31, :_reduce_none,
+  1, 31, :_reduce_none,
+  1, 31, :_reduce_none,
+  1, 31, :_reduce_none,
+  1, 31, :_reduce_none,
+  1, 31, :_reduce_none,
+  3, 38, :_reduce_30,
+  3, 38, :_reduce_31,
+  3, 38, :_reduce_32,
+  3, 38, :_reduce_33,
+  1, 26, :_reduce_34,
+  3, 26, :_reduce_35,
+  1, 39, :_reduce_none ]
 
-racc_reduce_n = 31
+racc_reduce_n = 37
 
-racc_shift_n = 44
+racc_shift_n = 55
 
 racc_token_table = {
   false => 0,
@@ -160,9 +184,12 @@ racc_token_table = {
   :NIL => 16,
   :LSQBRA => 17,
   :RSQBRA => 18,
-  :COMMA => 19 }
+  :LCBRA => 19,
+  :RCBRA => 20,
+  :ROCKET => 21,
+  :COMMA => 22 }
 
-racc_nt_base = 20
+racc_nt_base = 23
 
 racc_use_result_var = false
 
@@ -202,6 +229,9 @@ Racc_token_to_s_table = [
   "NIL",
   "LSQBRA",
   "RSQBRA",
+  "LCBRA",
+  "RCBRA",
+  "ROCKET",
   "COMMA",
   "$start",
   "root",
@@ -215,6 +245,9 @@ Racc_token_to_s_table = [
   "boolean",
   "array",
   "elements",
+  "hash",
+  "pairs",
+  "pair",
   "binary_operation",
   "terminator" ]
 
@@ -226,147 +259,175 @@ Racc_debug_parser = false
 
 # reduce 1 omitted
 
-module_eval(<<'.,.,', 'lani.y', 31)
+module_eval(<<'.,.,', 'lani.y', 32)
   def _reduce_2(val, _values)
      AST::Program.new( filename, lineno, [])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 32)
+module_eval(<<'.,.,', 'lani.y', 33)
   def _reduce_3(val, _values)
      AST::Program.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 34)
+module_eval(<<'.,.,', 'lani.y', 35)
   def _reduce_4(val, _values)
      AST::IntegerNode.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 35)
+module_eval(<<'.,.,', 'lani.y', 36)
   def _reduce_5(val, _values)
      AST::FloatNode.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 37)
+module_eval(<<'.,.,', 'lani.y', 38)
   def _reduce_6(val, _values)
      AST::StringNode.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 39)
+module_eval(<<'.,.,', 'lani.y', 40)
   def _reduce_7(val, _values)
      AST::VariableAccessNode.new( filename, lineno, val[0])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 41)
+module_eval(<<'.,.,', 'lani.y', 42)
   def _reduce_8(val, _values)
     AST::VariableAssignmentNode.new( filename, lineno, val[0], val[2]) 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 43)
+module_eval(<<'.,.,', 'lani.y', 44)
   def _reduce_9(val, _values)
      AST::TrueBooleanNode.new( filename, lineno)
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 44)
+module_eval(<<'.,.,', 'lani.y', 45)
   def _reduce_10(val, _values)
      AST::FalseBooleanNode.new( filename, lineno)
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 45)
+module_eval(<<'.,.,', 'lani.y', 46)
   def _reduce_11(val, _values)
      AST::NilBooleanNode.new( filename, lineno)
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 47)
+module_eval(<<'.,.,', 'lani.y', 48)
   def _reduce_12(val, _values)
      AST::ArrayNode.new( filename, lineno, [])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 48)
+module_eval(<<'.,.,', 'lani.y', 49)
   def _reduce_13(val, _values)
      AST::ArrayNode.new( filename, lineno, val[1]) 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 50)
+module_eval(<<'.,.,', 'lani.y', 51)
   def _reduce_14(val, _values)
      [val[0]] 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 51)
+module_eval(<<'.,.,', 'lani.y', 52)
   def _reduce_15(val, _values)
      val[0] << val[2] 
   end
 .,.,
 
-# reduce 16 omitted
-
-# reduce 17 omitted
-
-module_eval(<<'.,.,', 'lani.y', 55)
-  def _reduce_18(val, _values)
-     val[1] 
+module_eval(<<'.,.,', 'lani.y', 54)
+  def _reduce_16(val, _values)
+     AST::HashNode.new(filename, lineno, []) 
   end
 .,.,
 
-# reduce 19 omitted
+module_eval(<<'.,.,', 'lani.y', 55)
+  def _reduce_17(val, _values)
+     AST::HashNode.new(filename, lineno, val[1]) 
+  end
+.,.,
 
-# reduce 20 omitted
+# reduce 18 omitted
+
+module_eval(<<'.,.,', 'lani.y', 58)
+  def _reduce_19(val, _values)
+     val[0] + val[2] 
+  end
+.,.,
+
+module_eval(<<'.,.,', 'lani.y', 60)
+  def _reduce_20(val, _values)
+     [val[0], val[2]] 
+  end
+.,.,
 
 # reduce 21 omitted
 
 # reduce 22 omitted
 
-# reduce 23 omitted
+module_eval(<<'.,.,', 'lani.y', 64)
+  def _reduce_23(val, _values)
+     val[1] 
+  end
+.,.,
 
-module_eval(<<'.,.,', 'lani.y', 63)
-  def _reduce_24(val, _values)
+# reduce 24 omitted
+
+# reduce 25 omitted
+
+# reduce 26 omitted
+
+# reduce 27 omitted
+
+# reduce 28 omitted
+
+# reduce 29 omitted
+
+module_eval(<<'.,.,', 'lani.y', 73)
+  def _reduce_30(val, _values)
     AST::AddNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 64)
-  def _reduce_25(val, _values)
+module_eval(<<'.,.,', 'lani.y', 74)
+  def _reduce_31(val, _values)
     AST::SubtractNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 65)
-  def _reduce_26(val, _values)
+module_eval(<<'.,.,', 'lani.y', 75)
+  def _reduce_32(val, _values)
     AST::MultiplyNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 66)
-  def _reduce_27(val, _values)
+module_eval(<<'.,.,', 'lani.y', 76)
+  def _reduce_33(val, _values)
     AST::DivideNode.new( filename, lineno, val[0], val[2])
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 68)
-  def _reduce_28(val, _values)
+module_eval(<<'.,.,', 'lani.y', 78)
+  def _reduce_34(val, _values)
      [val[0]] 
   end
 .,.,
 
-module_eval(<<'.,.,', 'lani.y', 69)
-  def _reduce_29(val, _values)
+module_eval(<<'.,.,', 'lani.y', 79)
+  def _reduce_35(val, _values)
      val[0] << val[2] 
   end
 .,.,
 
-# reduce 30 omitted
+# reduce 36 omitted
 
 def _reduce_none(val, _values)
   val[0]
