@@ -43,7 +43,7 @@ describe Lani::Parser, '#tokenize' do
       [:ADD, "+"],
       [:FLOAT, 23423.3],
     ])
-    
+
   end
 
   it 'tokenizes a complex expression' do
@@ -83,7 +83,7 @@ describe Lani::Parser, '#tokenize' do
       [:INTEGER, 2],
     ])
   end
-  
+
 
   it 'tokenizes an identifier' do
     expect(tokenize('vari_able')).to eq([
@@ -109,13 +109,13 @@ describe Lani::Parser, '#tokenize' do
     ])
   end
 
-  # it 'tokenizes a hash' do
-  #   expect(tokenize('{1 => 2}')).to eq([
-  #     [:LCBRA,  '{'],
-  #     [:INTEGER, 1],
-  #     [:ROCKET, '=>'],
-  #     [:INTEGER, 2],
-  #     [:RCBRA,  '}'],
-  #   ])
-  # end
+  it 'tokenizes a hash' do
+    expect(tokenize('{1 => 2}')).to eq([
+      [:LCBRA,  '{'],
+      [:INTEGER, 1],
+      [:ROCKET, '=>'],
+      [:INTEGER, 2],
+      [:RCBRA,  '}'],
+    ])
+  end
 end

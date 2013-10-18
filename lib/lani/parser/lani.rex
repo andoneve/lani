@@ -23,19 +23,22 @@ rule
   \/      { [:DIVIDE, text] }
   \(      { [:LPAREN, text]}
   \)      { [:RPAREN, text]}
+  \=>     { [:ROCKET, text]}
   \=      { [:ASSIGN, text]}
   \[      { [:LSQBRA, text]}
   \]      { [:RSQBRA, text]}
+  \{      { [:LCBRA, text]}
+  \}      { [:RCBRA, text]}
   \,      { [:COMMA, text]}
 
 
 
 # NewLines
   \n      { [:NEWLINE, text]}
-  
+
 # CatchAll
   .       # no action
-  
+
 inner
   # here we put any ruby code we want to extend our lexer with.
   # for example, our own tokenize method.
