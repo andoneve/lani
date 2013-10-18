@@ -63,7 +63,7 @@ describe Lani::Compiler do
     Lani::Compiler.eval("[1, 2 + 4, \"foo\", [3]]").should eq([1, 6, "foo", [3]])
   end
 
-  # it 'compiles a hash' do
-  #   Lani::Compiler.eval("{1 => 12, \\"foo\\" => 98}").should eq({1 => 12, "foo" => 98})
-  # end
+  it 'compiles a hash' do
+    Lani::Compiler.eval("{1 => 12, \"foo\" => 98}").should eq({1 => 12, "foo" => 98})
+  end
 end

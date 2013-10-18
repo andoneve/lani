@@ -244,7 +244,20 @@ module AST
 
     def bytecode(g)
       pos(g)
-      g.push_nil
+
+      g.push_cpath_top
+      g.find_const :Hash
+      g.send :allocate, 0
+
+      array.each_slice(2) do |k, v|
+        g.dup
+
+        k.bytecode(g)
+        v.bytecode(g)
+        g.send :[]=, 2
+
+        g.pop
+      end
     end
   end
 end

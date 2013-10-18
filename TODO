@@ -1,5 +1,0 @@
-Hashes
-
-* Implement hashes. Look at how lambra does it.
-    github.com/txus/lambra
-    (in lib/lambra/bytecode_compiler.rb:220)
