@@ -1,3 +1,5 @@
+RBX = Rubinius::ToolSet.current::TS
+
 require "lani/version"
 require "lani/parser"
 require "lani/compiler"

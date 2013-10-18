@@ -2,8 +2,8 @@ require_relative 'parser'
 require_relative 'generator'
 
 module Lani
-  class Compiler < Rubinius::Compiler
-    Stages = Hash.new { |h,k| Rubinius::Compiler::Stages[k] }
+  class Compiler < RBX::Compiler
+    Stages = Hash.new { |h,k| RBX::Compiler::Stages[k] }
 
     def initialize(from, to)
       @start = Stages[from].new self, to
@@ -31,7 +31,9 @@ module Lani
       cm.scope.script     = script
 
       be.under_context(binding.variables, cm)
-      be.call_on_instance(instance)
+      object = be.call_on_instance(instance)
+      p "EVALUATED: #{object}"
+      object
     end
 
     def self.compile_eval(string, variable_scope, file="(eval)", line=1)
@@ -45,7 +47,7 @@ module Lani
       compiler = new :eval, :compiled_code
 
       parser = compiler.parser
-      parser.root Rubinius::AST::EvalExpression
+      parser.root RBX::AST::EvalExpression
       parser.default_transforms
       parser.input string, file, line
 
@@ -63,9 +65,9 @@ module Lani
 
     end
 
-    class Generator < Rubinius::Compiler::Generator
+    class Generator < RBX::Compiler::Generator
       Stages[:bytecode] = self
-      next_stage Rubinius::Compiler::Encoder
+      next_stage RBX::Compiler::Encoder
 
       def initialize(*)
         super
@@ -82,7 +84,7 @@ module Lani
       end
     end
 
-    class Parser < Rubinius::Compiler::Parser
+    class Parser < RBX::Compiler::Parser
       def initialize(*)
         super
       ensure
