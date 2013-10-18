@@ -261,6 +261,27 @@ module AST
     end
   end
 
+  class MessageSend < Node
+    attr_reader :receiver, :name, :arguments
+
+    def initialize(filename, lineno, receiver, name, arguments)
+      super
+      @receiver = receiver
+      @name = name.to_sym
+      @arguments = arguments
+    end
+
+    def bytecode(g)
+      pos(g)
+
+      receiver.bytecode(g)
+      arguments.each do |argument|
+        argument.bytecode(g)
+      end
+      g.send name, arguments.count
+    end
+  end
+
   class ClosureNode < Node
     attr_reader :arguments, :body, :scope
 

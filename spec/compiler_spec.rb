@@ -71,4 +71,12 @@ describe Lani::Compiler do
     fn = Lani::Compiler.eval("x = 3\n-> a, b { x * b }")
     fn.call(:foo, 2).should eq(6)
   end
+
+  it 'compiles a message send without arguments' do
+    Lani::Compiler.eval("3.odd?").should eq(true)
+  end
+
+  it 'compiles a message send with arguments' do
+    Lani::Compiler.eval(%q{"foo".gsub("f","h")}).should eq("hoo")
+  end
 end

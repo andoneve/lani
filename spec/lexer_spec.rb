@@ -129,4 +129,12 @@ describe Lani::Parser, '#tokenize' do
       [:RCBRA, '}'],
     ])
   end
+
+  it 'tokenizes a message send' do
+    expect(tokenize('2.odd?')).to eq([
+      [:INTEGER, 2],
+      [:DOT, "."],
+      [:IDENTIFIER, "odd?"],
+    ])
+  end
 end

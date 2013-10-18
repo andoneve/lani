@@ -14,7 +14,7 @@ rule
   nil     { [:NIL, nil]}
 
 # Identifier
-  [a-z_]+  { [:IDENTIFIER, text]}
+  [a-z_\?!]+  { [:IDENTIFIER, text]}
 
 # Operators
   \+      { [:ADD, text] }
@@ -31,6 +31,7 @@ rule
   \{      { [:LCBRA, text]}
   \}      { [:RCBRA, text]}
   \,      { [:COMMA, text]}
+  \.      { [:DOT, text]}
 
 
 
