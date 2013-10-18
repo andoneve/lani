@@ -7,6 +7,7 @@ $LOAD_PATH.unshift(File.expand_path('../../lib', file))
 require 'lani'
 
 disassemble = false
+filename = nil
 
 options = Rubinius::Options.new "Usage: #$0 [options] [program]", 20
 
@@ -34,15 +35,22 @@ options.on "-e", "CODE", "Execute code" do |code|
   exit 0
 end
 
-options.parse(ARGV)
-
-require 'readline'
-loop do
-  code =Readline.readline "ln> "
-  exit 0 unless code and code != "exit"
-  result = Lani::Compiler.eval(code, '(repl)', Object.send(:binding))
-  puts "=> #{result}"
+options.on_extra do |fname|
+  filename = fname
 end
 
+options.parse(ARGV)
 
+if filename
+  result = Lani::Compiler.eval(File.read(filename), filename, 1)
+  puts "# => #{result}"
+else
+  require 'readline'
+  loop do
+    code =Readline.readline "ln> "
+    exit 0 unless code and code != "exit"
+    result = Lani::Compiler.eval(code, '(repl)', Object.send(:binding))
+    puts "=> #{result}"
+  end
+end
 
