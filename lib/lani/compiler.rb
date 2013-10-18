@@ -31,9 +31,7 @@ module Lani
       cm.scope.script     = script
 
       be.under_context(binding.variables, cm)
-      object = be.call_on_instance(instance)
-      p "EVALUATED: #{object}"
-      object
+      be.call_on_instance(instance)
     end
 
     def self.compile_eval(string, variable_scope, file="(eval)", line=1)

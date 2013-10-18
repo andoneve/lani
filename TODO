@@ -1,7 +1,3 @@
-REPL (bin/lani)
-
-* [BUG] When you evaluate an array, it shows just the first element.
-
 Hashes
 
 * Implement hashes. Look at how lambra does it.

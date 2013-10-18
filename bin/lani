@@ -1,6 +1,6 @@
 #!/usr/bin/env rbx
 
-file = __FILE__ # => bin/lani  
+file = __FILE__ # => bin/lani
 file = File.readlink(file) while File.symlink? file
 $LOAD_PATH.unshift(File.expand_path('../../lib', file))
 
@@ -10,18 +10,18 @@ disassemble = false
 
 options = Rubinius::Options.new "Usage: #$0 [options] [program]", 20
 
-options.on "-h", "--help", "Display this help" do 
-	puts options
-	exit 0
+options.on "-h", "--help", "Display this help" do
+  puts options
+  exit 0
 end
 
 
-options.on "-v", "--version", "Show version" do 
-	puts "Lani #{Lani::VERSION}"
-	exit 0
+options.on "-v", "--version", "Show version" do
+  puts "Lani #{Lani::VERSION}"
+  exit 0
 end
 
-options.on "-B", "--print-bytecode", "Print bytecode" do 
+options.on "-B", "--print-bytecode", "Print bytecode" do
   disassemble = true
 end
 
@@ -38,9 +38,10 @@ options.parse(ARGV)
 
 require 'readline'
 loop do
-	code =Readline.readline "ln> "
-	exit 0 unless code and code != "exit"
-	puts "=> %p" % Lani::Compiler.eval(code, '(repl)', Object.send(:binding))
+  code =Readline.readline "ln> "
+  exit 0 unless code and code != "exit"
+  result = Lani::Compiler.eval(code, '(repl)', Object.send(:binding))
+  puts "=> #{result}"
 end
 
 
