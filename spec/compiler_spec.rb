@@ -66,4 +66,9 @@ describe Lani::Compiler do
   it 'compiles a hash' do
     Lani::Compiler.eval("{1 => 12, \"foo\" => 98}").should eq({1 => 12, "foo" => 98})
   end
+
+  it 'compiles a closure' do
+    fn = Lani::Compiler.eval("x = 3\n-> a, b { x * b }")
+    fn.call(:foo, 2).should eq(6)
+  end
 end

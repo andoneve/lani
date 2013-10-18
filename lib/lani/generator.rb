@@ -11,5 +11,12 @@ module Lani
       end
       puts '**end**'
     end
+
+    def finalize
+      self.local_names = state.scope.local_names
+      self.local_count = state.scope.local_count
+      pop_state
+      close
+    end
   end
 end

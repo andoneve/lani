@@ -25,12 +25,12 @@ module AST
       g.file = (filename || :"(lani)").to_sym
       pos(g)
 
-      body.each do |expression|
+      body.each_with_index do |expression, idx|
         expression.bytecode(g)
+        g.pop unless idx == body.size - 1
       end
 
-      g.local_names = g.state.scope.local_names
-      g.local_count = g.state.scope.local_count
+      g.finalize
     end
   end
 
@@ -262,16 +262,73 @@ module AST
   end
 
   class ClosureNode < Node
-    attr_reader :arguments, :body
+    attr_reader :arguments, :body, :scope
 
     def initialize(filename, lineno, arguments, body)
       super
+      @scope = RBX::AST::Iter.new(
+        filename,
+        lineno,
+        AST::Program.new(filename, lineno, [])
+      )
       @arguments = arguments
       @body = body
     end
 
     def bytecode(g)
       pos(g)
+
+      state = g.state
+      state.scope.nest_scope scope
+
+      fn_g = new_fn_generator(g)
+      pos(fn_g)
+
+      fn_g.push_state scope
+
+      fn_g.state.push_super state.super
+      fn_g.state.push_eval state.eval
+      fn_g.state.push_name fn_g.name
+
+      compile_arguments(fn_g)
+      fn_g.state.push_block
+
+      body.each_with_index do |expression, idx|
+        expression.bytecode(fn_g)
+        fn_g.pop unless idx == body.size - 1
+      end
+
+      fn_g.state.pop_block
+      fn_g.ret
+      fn_g.finalize
+
+      g.create_block fn_g
+    end
+
+    private
+
+    def compile_arguments(g)
+      arguments.each_with_index do |a, i|
+        g.shift_array
+        local = g.state.scope.new_local(a.to_s)
+        g.set_local local.slot
+        g.pop
+      end
+      g.pop unless arguments.empty?
+    end
+
+    def new_fn_generator(g)
+      blk = g.class.new
+      blk.name = g.state.name || :__fn__
+      blk.file = g.file
+      blk.for_block = true
+
+      blk.required_args = arguments.count
+      blk.post_args = arguments.count
+      blk.total_args = arguments.count
+      blk.cast_for_multi_block_arg unless arguments.count.zero?
+
+      blk
     end
   end
 end
