@@ -260,4 +260,18 @@ module AST
       end
     end
   end
+
+  class ClosureNode < Node
+    attr_reader :arguments, :body
+
+    def initialize(filename, lineno, arguments, body)
+      super
+      @arguments = arguments
+      @body = body
+    end
+
+    def bytecode(g)
+      pos(g)
+    end
+  end
 end

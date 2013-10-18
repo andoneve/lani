@@ -118,4 +118,15 @@ describe Lani::Parser, '#tokenize' do
       [:RCBRA,  '}'],
     ])
   end
+
+  it 'tokenizes a closure' do
+    expect(tokenize('-> a, b {}')).to eq([
+      [:FN, '->'],
+      [:IDENTIFIER, "a"],
+      [:COMMA, ','],
+      [:IDENTIFIER, "b"],
+      [:LCBRA, '{'],
+      [:RCBRA, '}'],
+    ])
+  end
 end

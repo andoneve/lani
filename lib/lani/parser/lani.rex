@@ -18,6 +18,7 @@ rule
 
 # Operators
   \+      { [:ADD, text] }
+  \->     { [:FN, text]}
   \-      { [:SUBTRACT, text] }
   \*      { [:MULTIPLY, text] }
   \/      { [:DIVIDE, text] }

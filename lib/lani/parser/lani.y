@@ -19,6 +19,7 @@ class Lani::Parser
   token LCBRA
   token RCBRA
   token ROCKET
+  token FN
   token COMMA
 
   prechigh
@@ -60,6 +61,12 @@ rule
 
   pair : expression ROCKET expression { [val[0], val[2]] }
 
+  closure : FN LCBRA expressions RCBRA { AST::ClosureNode.new(filename, lineno, [], val[2]) }
+          | FN arguments LCBRA expressions RCBRA { AST::ClosureNode.new(filename, lineno, val[1], val[3]) }
+
+  arguments : IDENTIFIER { [val[0].to_sym] }
+            | arguments COMMA IDENTIFIER { val[0] << val[2].to_sym }
+
   expression : number
              | binary_operation
              | LPAREN expression RPAREN { val[1] }
@@ -69,7 +76,7 @@ rule
              | boolean
              | array
              | hash
-
+             | closure
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}
                    | expression SUBTRACT expression {AST::SubtractNode.new( filename, lineno, val[0], val[2])}
