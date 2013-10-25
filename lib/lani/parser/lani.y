@@ -62,6 +62,7 @@ rule
   pair : expression ROCKET expression { [val[0], val[2]] }
 
   message_send : expression DOT IDENTIFIER { AST::MessageSendNode.new( filename, lineno, val[0], val[2] )}
+               | expression DOT IDENTIFIER LPAREN elements RPAREN { AST::MessageSendNode.new( filename, lineno, val[0], val[2], val[4])}
 
   expression : number
              | binary_operation
