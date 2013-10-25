@@ -260,4 +260,17 @@ module AST
       end
     end
   end
+
+  class MessageSendNode < Node
+    attr_reader :receiver, :method, :arguments
+
+    def initialize(filename, line, receiver, method, arguments=[])
+      super
+      @receiver = receiver
+      @method = method.to_sym
+      @arguments = arguments
+    end
+
+  end
+
 end

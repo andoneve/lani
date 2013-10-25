@@ -251,8 +251,8 @@ module Lani
     it 'parses a message send' do
       parse('2.odd?') do |expressions|
         msg = expressions.first
-        expect(msg).to be_kind_of(AST::MessageSend)
-        expect(msg.name).to eq(:odd?)
+        expect(msg).to be_kind_of(AST::MessageSendNode)
+        expect(msg.method).to eq(:odd?)
         expect(msg.receiver.value).to eq(2)
       end
     end

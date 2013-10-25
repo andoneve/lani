@@ -20,6 +20,7 @@ class Lani::Parser
   token RCBRA
   token ROCKET
   token COMMA
+  token DOT
 
   prechigh
     left MULTIPLY DIVIDE
@@ -60,6 +61,8 @@ rule
 
   pair : expression ROCKET expression { [val[0], val[2]] }
 
+  message_send : expression DOT IDENTIFIER { AST::MessageSendNode.new( filename, lineno, val[0], val[2] )}
+
   expression : number
              | binary_operation
              | LPAREN expression RPAREN { val[1] }
@@ -69,6 +72,7 @@ rule
              | boolean
              | array
              | hash
+             | message_send
 
 
   binary_operation : expression ADD expression {AST::AddNode.new( filename, lineno, val[0], val[2])}
