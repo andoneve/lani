@@ -256,5 +256,16 @@ module Lani
         expect(msg.receiver.value).to eq(2)
       end
     end
+
+    it 'parses a message send with arguments' do
+      parse('"foo".gsub("f", "h")') do |expressions|
+        msg = expressions.first
+        expect(msg).to be_kind_of(AST::MessageSendNode)
+        expect(msg.name).to eq(:gsub)
+        expect(msg.receiver.value).to eq("foo")
+        expect(msg.arguments.first.value).to eq("f")
+        expect(msg.arguments.last.value).to eq("h")
+      end
+    end
   end
 end
