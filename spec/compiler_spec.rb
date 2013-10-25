@@ -66,4 +66,17 @@ describe Lani::Compiler do
   it 'compiles a hash' do
     Lani::Compiler.eval("{1 => 12, \"foo\" => 98}").should eq({1 => 12, "foo" => 98})
   end
+
+  it 'compiles a closure' do
+    fn = Lani::Compiler.eval("x = 3\n-> a, b { x * b }")
+    fn.call(:foo, 2).should eq(6)
+  end
+
+  it 'compiles a message send without arguments' do
+    Lani::Compiler.eval("3.odd?").should eq(true)
+  end
+
+  it 'compiles a message send with arguments' do
+    Lani::Compiler.eval(%q{"foo".gsub("f","h")}).should eq("hoo")
+  end
 end

@@ -118,4 +118,23 @@ describe Lani::Parser, '#tokenize' do
       [:RCBRA,  '}'],
     ])
   end
+
+  it 'tokenizes a closure' do
+    expect(tokenize('-> a, b {}')).to eq([
+      [:FN, '->'],
+      [:IDENTIFIER, "a"],
+      [:COMMA, ','],
+      [:IDENTIFIER, "b"],
+      [:LCBRA, '{'],
+      [:RCBRA, '}'],
+    ])
+  end
+
+  it 'tokenizes a message send' do
+    expect(tokenize('2.odd?')).to eq([
+      [:INTEGER, 2],
+      [:DOT, "."],
+      [:IDENTIFIER, "odd?"],
+    ])
+  end
 end
