@@ -239,14 +239,23 @@ module Lani
       end
     end
 
-    # it 'parses a closure' do
-    #   parse('-> a, b { 3 }') do |expressions|
-    #     closure = expressions.first
-    #     expect(closure).to be_kind_of(AST::ClosureNode)
-    #     expect(closure.arguments).to eq([:a, :b])
-    #     expect(closure.body.first.value).to eq(3)
-    #   end
-    # end
+    it 'parses a closure' do
+      parse('-> { 3 }') do |expressions|
+        closure = expressions.first
+        expect(closure).to be_kind_of(AST::ClosureNode)
+        expect(closure.arguments).to eq([])
+        expect(closure.body.first.value).to eq(3)
+      end
+    end
+
+    it 'parses a closure with arguments' do
+      parse('-> a, b { 3 }') do |expressions|
+        closure = expressions.first
+        expect(closure).to be_kind_of(AST::ClosureNode)
+        expect(closure.arguments).to eq([:a, :b])
+        expect(closure.body.first.value).to eq(3)
+      end
+    end
 
     it 'parses a message send' do
       parse('2.odd?') do |expressions|
