@@ -270,7 +270,16 @@ module AST
       @method = method.to_sym
       @arguments = arguments
     end
+  end
 
+  class ClosureNode < Node
+    attr_reader :arguments, :body
+
+    def initialize(filename, line, arguments=[], body)
+      super
+      @arguments = arguments.map { |x| x.to_sym }
+      @body = body
+    end
   end
 
 end
