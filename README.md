@@ -19,6 +19,10 @@ After installing Rubinius, install Lani as a gem:
 
 ## Development
 
+Must download and install RVM. Now run rubinius:
+
+    $ rvm use rbx
+
 To run the tests:
 
     $ rake test
