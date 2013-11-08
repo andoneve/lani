@@ -270,6 +270,18 @@ module AST
       @method = method.to_sym
       @arguments = arguments
     end
+
+    def bytecode(g)
+      pos(g)
+
+      receiver.bytecode(g)
+      arguments.each do |element|
+        element.bytecode(g)
+      end
+
+      g.send method, arguments.count
+
+    end
   end
 
   class ClosureNode < Node
