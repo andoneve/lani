@@ -1,1 +1,24 @@
-* Implement closures.
+# CREATING A CLOSURE
+
+We need to create a new scope, and nest it to our current one.
+We need to create a new generator, and assign the new scope to it.
+
+In the NEW generator:
+
+  * Push the scope (push_state)
+  * [ some generator setup boilerplate ]
+
+  * Compile arguments passed to the function
+  * Push a block
+    * Compile the body of a function
+  * Pop a block
+
+  * Pop the scope (pop_state)
+
+  * [ some generator finalize boilerplate ]
+
+In our CURRENT generator:
+
+  g.create_block my_new_generator
+
+  And there you go: our closure is a beautiful object on the stack.
