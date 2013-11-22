@@ -1,7 +1,8 @@
 # CREATING A CLOSURE
 
-We need to create a new scope, and nest it to our current one.
-We need to create a new generator, and assign the new scope to it.
+When we initialize the node, we need to create a new scope, and later we nest it to our current one in the bytecode method.
+
+We need to create a new generator, and assign the new scope to it. We need to do this because we need a new generator to compile every method. 
 
 In the NEW generator:
 
@@ -13,7 +14,7 @@ In the NEW generator:
     * Compile the body of a function
   * Pop a block
 
-  * Pop the scope (pop_state)
+  * Pop the scope (pop_state) -- it's in finalize
 
   * [ some generator finalize boilerplate ]
 

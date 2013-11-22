@@ -25,12 +25,12 @@ module AST
       g.file = (filename || :"(lani)").to_sym
       pos(g)
 
-      body.each do |expression|
+      body.each_with_index do |expression, idx|
         expression.bytecode(g)
+        g.pop unless idx == body.size - 1
       end
 
-      g.local_names = g.state.scope.local_names
-      g.local_count = g.state.scope.local_count
+      g.finalize
     end
   end
 
@@ -285,13 +285,72 @@ module AST
   end
 
   class ClosureNode < Node
-    attr_reader :arguments, :body
+    attr_reader :arguments, :body, :scope
 
     def initialize(filename, line, arguments=[], body)
       super
+      @scope = RBX::AST::Iter.new(
+        filename,
+        line,
+        AST::Program.new(filename, line, [])
+      )
       @arguments = arguments.map { |x| x.to_sym }
       @body = body
     end
-  end
 
+    def bytecode(g)
+      pos(g)
+
+      outer_scope = g.state.scope
+      outer_scope.nest_scope scope
+
+      closure_g = new_closure_generator(g)
+
+      closure_g.push_state scope
+
+      closure_g.state.push_super g.state.super
+      closure_g.state.push_eval g.state.eval 
+      closure_g.state.push_name closure_g.name 
+
+      compile_arguments(closure_g)
+      closure_g.state.push_block
+
+      body.each_with_index do |expression, idx|
+        expression.bytecode(closure_g)
+        closure_g.pop unless idx == body.size - 1
+      end
+
+      closure_g.state.pop_block
+      closure_g.ret
+      closure_g.finalize
+
+      g.create_block closure_g
+    end
+
+    private
+
+    def compile_arguments(g)
+      arguments.each_with_index do |a, i|
+        g.shift_array
+        local = g.state.scope.new_local(a.to_s)
+        g.set_local local.slot
+        g.pop
+      end
+      g.pop unless arguments.empty?
+    end
+
+    def new_closure_generator(g)
+      blk = g.class.new
+      blk.name = g.state.name || :__fn__
+      blk.file = g.file
+      blk.for_block = true
+
+      blk.required_args = arguments.count
+      blk.post_args = arguments.count
+      blk.total_args = arguments.count
+      blk.cast_for_multi_block_arg unless arguments.count.zero?
+
+      blk
+    end
+  end
 end
